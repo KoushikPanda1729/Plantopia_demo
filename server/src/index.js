@@ -9,11 +9,9 @@ connectDB()
       console.log("Error occured after DB connection : ", error);
     });
 
-    // app.listen(process.env.PORT || 8000, () => {
-    //   console.log("App is running at port : ", process.env.PORT);
-    // });
-
-    app(req, res); // Use Express to handle the request
+    app.listen(process.env.PORT || 8000, () => {
+      console.log("App is running at port : ", process.env.PORT);
+    });
   })
   .catch((error) => {
     console.log("MongoDB connection error : ", error);
