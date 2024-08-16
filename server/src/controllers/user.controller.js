@@ -14,7 +14,7 @@ import { expireTimeFunction } from "../utils/timeExpire.util.js";
 import bcrypt from "bcrypt";
 
 const demo = asyncHandler(async (req, res) => {
-  return res.status(200).json({ message: "success" });
+  return res.status(200).json({ message: "success From vercel " });
 });
 
 export const generateAccessTokenAndRefreshToken = async (userId) => {
