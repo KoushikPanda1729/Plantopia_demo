@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import "../styles/nav.css";
 
+
 const RootLayout = () => {
   const user = useRouteLoaderData("parentId");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,7 +10,6 @@ const RootLayout = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
   return (
     <>
       <main>

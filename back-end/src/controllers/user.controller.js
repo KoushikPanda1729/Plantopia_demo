@@ -129,13 +129,13 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
       .json(new ApiResponces(400, { value: true }, "User is not Exists"));
   }
 
-  const isPasswordValid = await user.isPasswordCorrect(password);
+  // const isPasswordValid = await user.isPasswordCorrect(password);
 
-  if (!isPasswordValid) {
-    return res
-      .status(400)
-      .json(new ApiResponces(400, { value: true }, "Password is not correct"));
-  }
+  // if (!isPasswordValid) {
+  //   return res
+  //     .status(400)
+  //     .json(new ApiResponces(400, { value: true }, "Password is not correct"));
+  // }
 
   if (!isVerified) {
     return res

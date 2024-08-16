@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import session from "express-session";
 import dotenv from "dotenv";
 dotenv.config("./.env");
 
@@ -12,15 +11,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ limit: "20kb", extended: true }));
 app.use(express.json({ limit: "20kb" }));
 app.use(express.static("public"));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    secret: process.env.SESSION_SECRET,
-  })
-);
 
-// ====================================
 import userRouter from "./routes/user.route.js";
 
 app.use("/api/v1/users", userRouter);

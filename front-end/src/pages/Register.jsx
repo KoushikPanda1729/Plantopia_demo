@@ -64,7 +64,10 @@ const Register = () => {
     };
 
     try {
-      const res = await axios.post(`/api/v1/users/register-google`, credentials);
+      const res = await axios.post(
+        `/api/v1/users/register-google`,
+        credentials
+      );
       if (res?.data?.data?.user?.address === "false") {
         window.location.href = "/update-security-address";
       } else {
@@ -99,6 +102,14 @@ const Register = () => {
           </p>
           <div className="signUp-content">
             <GoogleLogin
+              type="standard"
+              theme="outline"
+              size="large"
+              text="signup_with"
+              shape="rectangular"
+              logo_alignment="left"
+              width="30"
+              locale="en"
               onSuccess={handleGoogleSuccess}
               onError={handleGoogleError}
             />

@@ -104,6 +104,14 @@ const Login = () => {
               </span>
               <div className="login-social-option">
                 <GoogleLogin
+                  type="standard"
+                  theme="outline"
+                  size="large"
+                  text="signin_with"
+                  shape="rectangular"
+                  logo_alignment="left"
+                  width="30"
+                  locale="en"
                   onSuccess={handleGoogleSuccess}
                   onError={handleGoogleError}
                 />
