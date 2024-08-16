@@ -7,7 +7,7 @@ const googleClientId = import.meta.env.VITE_GOOGLE_SIGNUP_CLIENT_ID;
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <GoogleOAuthProvider clientId={googleClientId}>
+    <GoogleOAuthProvider clientId="512249499931-ucs7oq5k0tg0u1mkodficsbru0ntk6lc.apps.googleusercontent.com">
       <App />
     </GoogleOAuthProvider>
   </StrictMode>
