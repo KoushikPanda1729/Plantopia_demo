@@ -13,6 +13,10 @@ import sendMail from "../utils/sendEmail.util.js";
 import { expireTimeFunction } from "../utils/timeExpire.util.js";
 import bcrypt from "bcrypt";
 
+const demo = asyncHandler(async (req, res) => {
+  return res.status(200).json({ message: "success" });
+});
+
 export const generateAccessTokenAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -628,4 +632,5 @@ export {
   registerWithGoogle,
   loginWithGoogle,
   updateSecurityKeyAndAddress,
+  demo,
 };

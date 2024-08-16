@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  demo,
   forgotPasswordWithAnswer,
   forgotPasswordWithOTP,
   getUser,
@@ -38,8 +39,6 @@ userRouter.route("/get-user").get(verifyJWT, getUser);
 userRouter.route("/forgot").post(forgotPasswordWithAnswer);
 userRouter.route("/sentOTP").post(sendEmailWithOTP);
 userRouter.route("/forgotOTP").post(forgotPasswordWithOTP);
-userRouter.route("/demo").get((req, res) => {
-  return res.send("hello");
-});
+userRouter.route("/demo").get(demo);
 
 export default userRouter;
