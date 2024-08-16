@@ -1,0 +1,65 @@
+/* Parent container to center the child container */
+body {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+
+
+.forgot-password-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 40%;
+    height: 50%;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 0.1px solid gray;
+}
+
+.forgot-password-option {
+    width: 60%;
+}
+
+.forgot-password-option input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4b0082;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.forgot-password-option input[type="submit"]:hover {
+    background-color: #6a0dad;
+    /* Light indigo hover color */
+}
+
+@media (max-width: 800px) {
+    .forgot-password-container {
+        width: 250px;
+        height: 250px;
+        padding: 10px;
+    }
+
+    .forgot-password-option input[type="submit"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .forgot-password-option {
+        width: 80%;
+    }
+}

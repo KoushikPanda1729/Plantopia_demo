@@ -1,0 +1,94 @@
+.forgot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.forgot-container div {
+    width: 100%;
+}
+
+.forgot-container label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.forgot-container input[type="email"],
+.forgot-container input[type="text"],
+.forgot-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.forgot-container input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4b0082;
+    /* Indigo background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.forgot-container input[type="submit"]:hover {
+    background-color: #6a0dad;
+    /* Light indigo hover color */
+}
+
+.forgot-container p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.goto-login {
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.goto-login a {
+    color: green;
+    margin-left: 0.3rem;
+    text-decoration: none;
+}
+
+.goto-login a:hover {
+    color: indigo;
+    border-bottom: 1px solid indigo;
+}
+
+.wrong-credencial {
+    color: tomato;
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .forgot-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .forgot-container input[type="submit"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

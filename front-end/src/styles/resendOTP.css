@@ -1,0 +1,85 @@
+/* Container styling */
+body {
+    position: relative;
+}
+
+.resend-otp-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 0.1px solid gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+}
+
+/* Header styling */
+.resend-otp-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input field styling */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus state */
+.form-input:focus {
+    border-color: #4b0082;
+}
+
+/* Submit button styling */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4b0082;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Submit button hover state */
+.submit-button:hover {
+    background-color: #6a0dad;
+}
+
+/* Responsive design */
+@media (max-width: 680px) {
+    .resend-otp-container {
+        width: 90%;
+        height: 50%;
+    }
+
+    .submit-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

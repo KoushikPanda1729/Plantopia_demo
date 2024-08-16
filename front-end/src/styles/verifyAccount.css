@@ -1,0 +1,110 @@
+/* VerifyAccount Section Styles */
+body {
+    position: relative;
+}
+
+.verify-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    border: 0.1px solid gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+}
+
+.otp-color {
+    color: tomato;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.verify-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.verify-container label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.verify-container input[type="number"],
+.verify-container input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+/* Remove default styling */
+.verify-container input[type="number"] {
+    background-color: transparent;
+    border-bottom: 2px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+/* Remove spinners */
+.verify-container input[type="number"]::-webkit-outer-spin-button,
+.verify-container input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.verify-container input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.verify-container input[type="number"]:focus {
+    border-bottom: 2px solid #4b0082;
+    /* Indigo color */
+}
+
+.verify-container input[type="submit"] {
+    background-color: #4b0082;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.verify-container input[type="submit"]:hover {
+    background-color: #6a0dad;
+}
+
+.verify-container input[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 900px) {
+    .verify-container {
+        width: 90%;
+        height: 50%;
+    }
+
+    .verify-container h2 {
+        font-size: 1.2rem;
+    }
+
+    .verify-container input[type="number"],
+    .verify-container input[type="submit"] {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+}
