@@ -49,18 +49,14 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/register" element={<Register />} action={registerAction} />
       <Route
-        path="/login"
+        path="/api/v1/users/login"
         element={<Login />}
         action={loginAction}
         loader={loginLoader}
       />
       <Route path="/account" element={<Account />} loader={accountLoader} />
       <Route path="/about" element={<About />} />
-      <Route
-        path="/profile"
-        element={<Profile />}
-        loader={profileLoader}
-      />
+      <Route path="/profile" element={<Profile />} loader={profileLoader} />
       <Route path="*" element={<Errorpage />} />
       <Route path="/logout" action={logoutAction} />
       <Route
