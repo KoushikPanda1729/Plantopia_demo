@@ -49,7 +49,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/register" element={<Register />} action={registerAction} />
       <Route
-        path="/login"
+        path="/api/login"
         element={<Login />}
         action={loginAction}
         loader={loginLoader}

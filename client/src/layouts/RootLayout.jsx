@@ -35,7 +35,7 @@ const RootLayout = () => {
           <ul className={`nav-list ${menuOpen ? "open" : ""}`}>
             {!user && (
               <li className="nav-item">
-                <NavLink to={"/login"}>Sign In</NavLink>
+                <NavLink to={"/api/login"}>Sign In</NavLink>
               </li>
             )}
             {!user && (
