@@ -5,7 +5,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "*.html",
+      "src": "*.jsx",
       "use": "@vercel/static"
     }
   ],
