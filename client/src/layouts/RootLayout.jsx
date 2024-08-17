@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import "../styles/nav.css";
 
+
 const RootLayout = () => {
   const user = useRouteLoaderData("parentId");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ const RootLayout = () => {
           <ul className={`nav-list ${menuOpen ? "open" : ""}`}>
             {!user && (
               <li className="nav-item">
-                <NavLink to={"/api/v1/users/login"}>Sign In</NavLink>
+                <NavLink to={"/login"}>Sign In</NavLink>
               </li>
             )}
             {!user && (
