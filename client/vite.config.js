@@ -6,7 +6,8 @@ export default defineConfig({
     proxy: {
       // "/api": "http://localhost:8000",
       // "/api": process.env.VITE_API_BASE_URL,
-      "/api": "https://plantopia-demo.vercel.app",
+      // "/api": "https://plantopia-demo.vercel.app",
+      "/api": "https://plantopia-demo.onrender.com",
     },
   },
   plugins: [react()],
