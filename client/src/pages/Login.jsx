@@ -106,7 +106,7 @@ const Login = () => {
                 joys of nurturing plants. Join our community of plant lovers and
                 let your green thumb flourish! 🌿🌺
               </span>
-              {/* <div className="login-social-option">
+              <div className="login-social-option">
                 <GoogleLogin
                   type="standard"
                   theme="outline"
@@ -119,7 +119,7 @@ const Login = () => {
                   onSuccess={handleGoogleSuccess}
                   onError={handleGoogleError}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="login-fields-container">

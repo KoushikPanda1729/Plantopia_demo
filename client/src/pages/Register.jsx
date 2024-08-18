@@ -100,7 +100,7 @@ const Register = () => {
             nurturing plants. Join our community of plant lovers and let your
             green thumb flourish! 🌿🌺
           </p>
-          {/* <div className="signUp-content">
+          <div className="signUp-content">
             <GoogleLogin
               type="standard"
               theme="outline"
@@ -113,7 +113,7 @@ const Register = () => {
               onSuccess={handleGoogleSuccess}
               onError={handleGoogleError}
             />
-          </div> */}
+          </div>
         </div>
       </div>
       <Form
