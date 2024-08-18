@@ -222,7 +222,22 @@ body {
     text-decoration: underline;
 }
 
+.redirect-to-login {
+    font-weight: bold;
+    text-align: right;
+}
 
+.redirect-to-login a {
+    text-decoration: none;
+    color: green;
+    transition: 0.5s;
+}
+
+.redirect-to-login a:hover {
+    border-bottom: 2px solid green;
+    color: indigo;
+    transition: 0.5s;
+}
 
 /* Media Queries for Responsive Design */
 @media (max-width: 1248px) {

@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Form, NavLink, redirect, useNavigation } from "react-router-dom";
+import {
+  Form,
+  NavLink,
+  redirect,
+  useActionData,
+  useNavigation,
+} from "react-router-dom";
 import "../index.css";
 import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
@@ -13,8 +19,9 @@ export const registerAction = async ({ request }) => {
     await axios.post(`/api/v1/users/register`, formData);
     return redirect("/verify-account");
   } catch (error) {
-    console.log("Error occurred at registration:", error.message);
-    return redirect("/login");
+    console.log("Already registerd:", error.message);
+    // return redirect("/login");
+    return { data: null };
   }
 };
 
@@ -22,6 +29,8 @@ const Register = () => {
   const { state } = useNavigation();
   const isSubmitting = state === "submitting";
   const [profileImagePreview, setProfileImagePreview] = useState(null);
+  const data = useActionData();
+  console.log(data);
 
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
@@ -242,6 +251,12 @@ const Register = () => {
             className="submit-button"
           />
         </div>
+        {data?.data === null && (
+          <p className="redirect-to-login">
+            User Already registered go to{" "}
+            <NavLink to={"/login"}>Sign in</NavLink>{" "}
+          </p>
+        )}
       </Form>
     </div>
   );
