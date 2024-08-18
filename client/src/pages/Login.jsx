@@ -2,7 +2,6 @@ import "../styles/login.css";
 import React from "react";
 import {
   Form,
-  Navigate,
   NavLink,
   redirect,
   useActionData,
@@ -35,10 +34,7 @@ export const loginAction = async ({ request }) => {
   };
 
   try {
-    await axios.post(
-      `/api/v1/users/login`,
-      credentials
-    );
+    await axios.post(`/api/v1/users/login`, credentials);
     return redirect(redirectTo);
   } catch (error) {
     if (error?.response?.data?.data?.verification) {

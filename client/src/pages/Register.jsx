@@ -112,7 +112,6 @@ const Register = () => {
           </p>
           <div className="signUp-content">
             <GoogleLogin
-              type="standard"
               theme="outline"
               size="large"
               text="signup_with"

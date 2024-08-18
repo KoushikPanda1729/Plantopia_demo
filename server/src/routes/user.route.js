@@ -23,6 +23,7 @@ const userRouter = Router();
 
 userRouter.route("/register").post(upload.single("profileImage"), registerUser);
 userRouter.route("/register-google").post(registerWithGoogle);
+
 userRouter.route("/login-google").post(loginWithGoogle);
 userRouter.route("/verify").post(verifyAccount);
 userRouter.route("/login").post(logInUser);
