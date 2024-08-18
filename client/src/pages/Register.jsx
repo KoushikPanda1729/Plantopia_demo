@@ -7,14 +7,15 @@ import { GoogleLogin } from "@react-oauth/google";
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData(); // Directly get the FormData
+  console.log(formData);
 
   try {
     await axios.post(`/api/v1/users/register`, formData);
+    return redirect("/verify-account");
   } catch (error) {
     console.log("Error occurred at registration:", error.message);
+    return redirect("/login");
   }
-
-  return redirect("/verify-account");
 };
 
 const Register = () => {
