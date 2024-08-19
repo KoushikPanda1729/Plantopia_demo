@@ -24,7 +24,7 @@ import {
 import { loginAction, loginLoader } from "./pages/Login";
 import { profileLoader } from "./pages/Profile";
 import { accountLoader } from "./pages/Account";
-import { registerAction } from "./pages/Register";
+import { registerAction, registerLoader } from "./pages/Register";
 import { verifyAccountAction } from "./pages/VerifyAccount";
 import { logoutAction } from "./pages/Logout";
 import { getUser } from "./utils/getUser";
@@ -47,7 +47,12 @@ const router = createBrowserRouter(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
     <Route path="/" element={<RootLayout />} loader={getUser} id="parentId">
       <Route index element={<Home />} />
-      <Route path="/register" element={<Register />} action={registerAction} />
+      <Route
+        path="/register"
+        element={<Register />}
+        action={registerAction}
+        loader={registerLoader}
+      />
       <Route
         path="/login"
         element={<Login />}

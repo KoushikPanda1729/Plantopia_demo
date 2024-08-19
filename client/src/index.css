@@ -92,7 +92,7 @@ body {
     gap: 2rem;
 }
 
-.signUp-content button {
+/* .signUp-content button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,7 +116,9 @@ body {
     color: black;
     border-radius: none;
     text-align: center;
-}
+} */
+
+
 
 
 
@@ -303,6 +305,11 @@ body {
 
     .submit-button {
         font-size: 14px;
+    }
+
+    .signUp-content span {
+        width: 60vw;
+        font-size: 1rem;
     }
 }
 

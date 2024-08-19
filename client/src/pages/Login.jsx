@@ -101,9 +101,7 @@ const Login = () => {
               <span>
                 {" "}
                 Welcome to Plantopia, where every leaf and petal tells a story!
-                Dive into our lush world of vibrant greenery and discover the
-                joys of nurturing plants. Join our community of plant lovers and
-                let your green thumb flourish! 🌿🌺
+                🌿🌺
               </span>
               <div className="login-social-option">
                 {loading ? (

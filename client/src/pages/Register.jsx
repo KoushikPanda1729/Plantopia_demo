@@ -10,6 +10,16 @@ import {
 import "../index.css";
 import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
+import { getUser } from "../utils/getUser";
+
+export const registerLoader = async () => {
+  const user = await getUser();
+  if (user) {
+    return redirect("/");
+  } else {
+    return null;
+  }
+};
 
 export const registerAction = async ({ request }) => {
   const formData = await request.formData(); // Directly get the FormData
@@ -84,7 +94,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
-      // window.location.href = "/login";
+      window.location.href = "/login";
       setAlreadyExists(true);
     } finally {
       setLoading(false);
@@ -108,10 +118,7 @@ const Register = () => {
         <div className="signUp">
           <h1>Sign up via </h1>
           <p>
-            Welcome to Plantopia, where every leaf and petal tells a story! Dive
-            into our lush world of vibrant greenery and discover the joys of
-            nurturing plants. Join our community of plant lovers and let your
-            green thumb flourish! 🌿🌺
+            Welcome to Plantopia, where every leaf and petal tells a story! 🌿🌺
           </p>
           <div className="signUp-content">
             {loading ? (
