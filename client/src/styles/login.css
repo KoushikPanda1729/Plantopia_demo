@@ -1,7 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .login-container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .login-social-container,
@@ -24,10 +30,10 @@
 
 .login-fields-container div {
     width: 60%;
-    padding: 1rem;
     background-color: rgba(255, 255, 255, 2);
     color: black;
-
+    padding: 1rem;
+    border-radius: 0.4rem;
 }
 
 .login-fields-container div p {
@@ -56,6 +62,7 @@
     padding: 0.5rem;
     width: 70%;
     margin: 0 auto;
+
 }
 
 .login-social-container::before {
@@ -231,23 +238,42 @@
     text-decoration: underline;
 }
 
-
+.submitting-button {
+    display: block;
+    background-color: white;
+    border-radius: 0.4rem;
+    width: 20vw;
+    text-align: center;
+    font-size: 1.3rem;
+    color: indigo;
+    padding: 0.7rem 0rem;
+    height: 2.7rem;
+    cursor: no-drop;
+    font-family: sans-serif;
+}
 
 /* Media Queries for Responsive Design */
 
 @media (max-width: 768px) {
-    .login-form {
-        padding: 1rem;
-    }
-
     .login-container {
         flex-direction: column;
         align-items: stretch;
+        margin: 0 auto;
+    }
+
+    .login-form .social {
+        width: 90%;
     }
 
     .login-social-container,
     .login-fields-container {
-        height: 100%;
+        background-color: #ffffff;
+        border: 0.1px solid gray;
+    }
+
+    .login-fields-container {
+        width: 90%;
+        margin: 1rem auto;
     }
 
     .login-social-container {
@@ -256,8 +282,14 @@
         margin-bottom: 1rem;
     }
 
-    .git {
-        margin-bottom: 6rem;
+    .social {
+        width: 80%;
+    }
+
+
+
+    .submitting-button {
+        width: 50vw;
     }
 
     .login-heading {
@@ -272,25 +304,9 @@
         font-size: 1rem;
     }
 
-    .login-social-container,
-    .login-fields-container {
-        flex: 1;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        border: 0.3px solid gray;
-    }
-
-    .social {
-        width: 90%;
-    }
-
-
 }
 
 @media (max-width: 480px) {
-    .login-form {
-        padding: 0.5rem;
-    }
 
     .login-heading {
         font-size: 1rem;
@@ -298,17 +314,18 @@
 
     .login-input {
         font-size: 0.8rem;
+
+    }
+
+    .login-fields-container div {
+        width: 100%;
+    }
+
+    .submitting-button {
+        width: 60vw;
     }
 
     .login-button {
         font-size: 0.9rem;
-    }
-
-    .login-social-container,
-    .login-fields-container {
-        flex: 1;
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        border: 0.3px solid gray;
     }
 }

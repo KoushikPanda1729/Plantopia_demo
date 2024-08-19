@@ -14,21 +14,27 @@ body {
     display: flex;
     gap: 5rem;
     justify-content: space-between;
-    width: 100%;
+    max-width: 100%;
 }
 
 .register-title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: -50px;
-    color: green;
+    font-size: 18px;
     display: flex;
-    font-family: sans-serif;
+    justify-content: left;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    color: green;
+}
 
+.plant-register {
+    width: 10%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 }
 
 .social-container {
-    width: 35%;
+    height: 70vh;
+    width: 40%;
     margin: 0 auto;
 }
 
@@ -48,8 +54,8 @@ body {
     background-position: center center;
     color: white;
     font-family: 'Times New Roman', Times, serif;
-    height: 50%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -119,8 +125,8 @@ body {
     border-radius: 8px;
     width: 40%;
     margin-right: 5%;
-    border-left: 1px solid gray;
     background-color: white;
+    border: 0.1px solid gray;
 }
 
 .form-group {
@@ -151,12 +157,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.plant-register {
-    height: 36%;
-    width: 24%;
-    object-fit: contain;
-    mix-blend-mode: multiply;
-}
+
 
 .image-preview {
     margin-top: 10px;
@@ -242,80 +243,27 @@ body {
 /* Media Queries for Responsive Design */
 @media (max-width: 1248px) {
     .register-container {
-        padding: 10px;
         flex-direction: column;
-        height: 100%;
         align-items: center;
-
     }
 
     .register-form {
-        border: 2px solid gray;
-    }
-
-
-    .signUp {
-        width: 85%;
+        width: 90%;
         margin: 0 auto;
-
-    }
-
-    .register-form {
-        width: 70%;
-        margin-left: 8%;
-    }
-
-    .plant-register {
-        height: 25%;
-        width: 20%;
-    }
-
-    .register-title {
-        font-size: 18px;
-        margin-bottom: 1px;
-
+        border-radius: 0.4rem;
     }
 
     .social-container {
         width: 90%;
     }
-
-    .signUp-content {
-        width: 85%;
-    }
-
-    .signUp-content button {
-        height: 40px;
-    }
 }
 
 
 @media (max-width: 768px) {
-    .register-container {
-        max-width: 100%;
-        padding: 15px;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .signUp {
-        width: 90%;
-    }
-
-    .register-form {
-        width: 90%;
-        margin-left: 8%;
-    }
-
 
     .preview-image {
         width: 120px;
         height: 120px;
-    }
-
-    .plant-register {
-        height: 20%;
-        width: 15%;
     }
 
     .submit-button {
@@ -324,16 +272,9 @@ body {
 }
 
 @media (max-width: 480px) {
-    .register-container {
-        padding: 10px;
-        flex-direction: column;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-    }
 
-    .register-title {
-        font-size: 20px;
+    .plant-register {
+        width: 20%;
     }
 
     .form-control {

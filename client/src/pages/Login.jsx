@@ -12,6 +12,7 @@ import axios from "axios";
 import { getUser } from "../utils/getUser";
 import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -56,17 +57,9 @@ const Login = () => {
     const token = credentialResponse.credential;
     const userData = jwtDecode(token);
 
-    let {
-      given_name: userName,
-      email,
-      sub: password,
-      email_verified: isVerified,
-    } = userData;
-    userName = userName + Math.floor(Math.random() * 10000000);
+    let { email, email_verified: isVerified } = userData;
     const credentials = {
-      userName,
       email,
-      password,
       address: false,
       role: "user",
       answer: false,
@@ -75,19 +68,22 @@ const Login = () => {
 
     const objectURL = new URL(window.location.href);
     const redirectTo = objectURL.searchParams.get("redirectTo") || "/";
+    setLoading(true);
     try {
       const res = await axios.post(`/api/v1/users/login-google`, credentials);
       window.location.href = redirectTo;
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
       window.location.href = "/register";
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleGoogleError = () => {
     console.log("Google Login Failed");
   };
-
+  const [loading, setLoading] = useState(false);
   return (
     <>
       <Form method="POST" action={loginURL} replace className="login-form">
@@ -103,18 +99,24 @@ const Login = () => {
                 let your green thumb flourish! 🌿🌺
               </span>
               <div className="login-social-option">
-                <GoogleLogin
-                  type="standard"
-                  theme="outline"
-                  size="large"
-                  text="signin_with"
-                  shape="rectangular"
-                  logo_alignment="left"
-                  width="30"
-                  locale="en"
-                  onSuccess={handleGoogleSuccess}
-                  onError={handleGoogleError}
-                />
+                {loading ? (
+                  <span className="submitting-button">
+                    <div>Please wait .....</div>{" "}
+                  </span>
+                ) : (
+                  <GoogleLogin
+                    type="standard"
+                    theme="outline"
+                    size="large"
+                    text={"signin_with"}
+                    shape="rectangular"
+                    logo_alignment="left"
+                    width="30"
+                    locale="en"
+                    onSuccess={handleGoogleSuccess}
+                    onError={handleGoogleError}
+                  />
+                )}
               </div>
             </div>
           </div>

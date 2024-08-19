@@ -116,16 +116,15 @@ const registerWithGoogle = asyncHandler(async (req, res) => {
 });
 
 const loginWithGoogle = asyncHandler(async (req, res) => {
-  const { userName, email, password, isVerified } = req.body;
-  if (!(userName || email)) {
+  const { email, isVerified } = req.body;
+
+  if (!email) {
     return res
       .status(400)
       .json(new ApiResponces(400, {}, "Username or Email not found"));
   }
 
-  const user = await User.findOne({
-    $or: [{ userName }, { email }],
-  });
+  const user = await User.findOne({ email });
 
   if (!user) {
     return res
@@ -617,6 +616,7 @@ const forgotPasswordWithOTP = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponces(200, {}, "Password updated successfully"));
 });
+
 export {
   registerUser,
   logInUser,
