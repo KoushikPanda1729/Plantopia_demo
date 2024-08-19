@@ -6,10 +6,6 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-}
 
 nav {
     display: flex;
@@ -17,7 +13,7 @@ nav {
     align-items: center;
     padding: 1rem;
     background-color: white;
-    border-bottom: 1.5px solid #ddd;
+    border-bottom: 1px solid gray;
     margin-bottom: 2rem;
     position: sticky;
     top: 0;
@@ -58,10 +54,6 @@ ul {
     align-items: center;
 }
 
-.get-start {
-    border: 1px solid green;
-    padding: 0.5rem 0;
-}
 
 .nav-item img {
     height: 35px;

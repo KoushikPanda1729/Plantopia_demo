@@ -72,7 +72,7 @@ const Register = () => {
       answer: false,
       isVerified,
     };
-
+    setLoading(true);
     try {
       const res = await axios.post(
         `/api/v1/users/register-google`,
@@ -81,18 +81,20 @@ const Register = () => {
       if (res?.data?.data?.user?.address === "false") {
         window.location.href = "/update-security-address";
       } else {
-        window.location.href = "/profile";
+        window.location.href = "/";
       }
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
       window.location.href = "/login";
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleGoogleError = () => {
     console.log("Google Login Failed");
   };
-
+  const [loading, setLoading] = useState(false);
   return (
     <div className="register-container">
       <div className="social-container">
@@ -111,17 +113,23 @@ const Register = () => {
             green thumb flourish! 🌿🌺
           </p>
           <div className="signUp-content">
-            <GoogleLogin
-              theme="outline"
-              size="large"
-              text="signup_with"
-              shape="rectangular"
-              logo_alignment="left"
-              width="30"
-              locale="en"
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleError}
-            />
+            {loading ? (
+              <span className="submitting-button">
+                <div>Please wait .....</div>{" "}
+              </span>
+            ) : (
+              <GoogleLogin
+                theme="outline"
+                size="large"
+                text="signup_with"
+                shape="rectangular"
+                logo_alignment="left"
+                width="30"
+                locale="en"
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+              />
+            )}
           </div>
         </div>
       </div>
