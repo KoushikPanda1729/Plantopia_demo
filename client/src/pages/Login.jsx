@@ -132,7 +132,7 @@ const Login = () => {
                 src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Fneem-leaves-white-background-medicinal-leaf-herb-green-leef-293390420.jpg&f=1&nofb=1&ipt=50d11f45bf6377c71da35e4e8824bec12124eaae2b3222d332fafc750affeffb&ipo=images"
                 alt="plant-register"
               />
-              <p className="login-label">Sign in to Plantopia</p>
+              <p className="login-label">Plantopia Sign In</p>
             </div>
             {data && data?.error && (
               <p className="login-error">{data?.error}</p>

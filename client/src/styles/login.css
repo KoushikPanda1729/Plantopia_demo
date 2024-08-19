@@ -157,12 +157,13 @@
 
 .login-logo {
     display: flex;
+    justify-content: left;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    height: 5rem;
 }
 
-.login-logo img {
-    height: 30%;
-    width: 30%;
-}
+
 
 .login-submit {
     text-align: right;
@@ -338,5 +339,9 @@
 
     .login-button {
         font-size: 0.9rem;
+    }
+
+    .login-logo img {
+        width: 20%;
     }
 }
