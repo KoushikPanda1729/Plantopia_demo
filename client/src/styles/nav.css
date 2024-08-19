@@ -75,6 +75,16 @@ ul li a:hover {
     color: #ff4500;
 }
 
+.get-into:active,
+.get-start:active {
+    color: green;
+    border: 1px solid green;
+    border-radius: 0.2rem;
+    color: green;
+    transition: 1s;
+}
+
+
 button {
     padding: 5px 10px;
     font-size: 16px;

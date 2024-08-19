@@ -74,7 +74,7 @@ const Login = () => {
       window.location.href = redirectTo;
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
-      window.location.href = "/register";
+      setNotExists(true);
     } finally {
       setLoading(false);
     }
@@ -84,11 +84,18 @@ const Login = () => {
     console.log("Google Login Failed");
   };
   const [loading, setLoading] = useState(false);
+  const [notExists, setNotExists] = useState(false);
   return (
     <>
       <Form method="POST" action={loginURL} replace className="login-form">
         <div className="login-container">
           <div className="social">
+            {notExists && (
+              <span className="redirect-login-register ">
+                User not exists go to{" "}
+                <NavLink to={"/register"}>Sign up </NavLink>
+              </span>
+            )}
             <div className="login-social-container">
               <h1 className="login-heading">WellCome Back</h1>
               <span>

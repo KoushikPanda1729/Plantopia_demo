@@ -17,7 +17,7 @@ export const setSecurityAndAddressAction = async ({ request }) => {
       address: data.get("address"),
     };
     await axios.post("/api/v1/users/update-address-security", credencial);
-    return redirect("/profile");
+    return redirect("/");
   } catch (error) {
     console.log("Error at security key : ", error);
     return { data: null };
@@ -25,10 +25,11 @@ export const setSecurityAndAddressAction = async ({ request }) => {
 };
 
 const SetSecurityAndAddress = () => {
-
   return (
     <>
       <Form method="POST" action="/update-security-address" className="form">
+        <h3>Add address and security key</h3>
+        <br />
         <div className="form-group address">
           <label htmlFor="address">Address</label>
           <input

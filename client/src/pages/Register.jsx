@@ -30,7 +30,6 @@ const Register = () => {
   const isSubmitting = state === "submitting";
   const [profileImagePreview, setProfileImagePreview] = useState(null);
   const data = useActionData();
-  console.log(data);
 
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
@@ -85,7 +84,8 @@ const Register = () => {
       }
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
-      window.location.href = "/login";
+      // window.location.href = "/login";
+      setAlreadyExists(true);
     } finally {
       setLoading(false);
     }
@@ -95,6 +95,7 @@ const Register = () => {
     console.log("Google Login Failed");
   };
   const [loading, setLoading] = useState(false);
+  const [alreadyExists, setAlreadyExists] = useState(false);
   return (
     <div className="register-container">
       <div className="social-container">
@@ -132,6 +133,11 @@ const Register = () => {
             )}
           </div>
         </div>
+        {alreadyExists && (
+          <span className="redirect-login-register">
+            Already signup go to <NavLink to={"/login"}>Sign in </NavLink>
+          </span>
+        )}
       </div>
       <Form
         method="POST"

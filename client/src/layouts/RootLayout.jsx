@@ -34,7 +34,7 @@ const RootLayout = () => {
           </div>
           <ul className={`nav-list ${menuOpen ? "open" : ""}`}>
             {!user && (
-              <li className="nav-item">
+              <li className="nav-item get-into">
                 <NavLink to={"/login"}>Sign In</NavLink>
               </li>
             )}
