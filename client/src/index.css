@@ -35,7 +35,7 @@ body {
 }
 
 .social-container {
-    height: 70vh;
+    height: 60vh;
     width: 40%;
     margin: 0 auto;
 }
@@ -92,31 +92,10 @@ body {
     gap: 2rem;
 }
 
-/* .signUp-content button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-    text-align: center;
-    height: 30%;
-    width: 100%;
-    padding: 0.5rem;
+.signUp h1 {
+    border: 4px solid green;
+    margin-top: 1rem;
 }
-
-.signUp-content button p {
-    margin-top: 30px;
-}
-
-
-.signUp-content P {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-    padding: 10px 20px;
-    color: black;
-    border-radius: none;
-    text-align: center;
-} */
 
 
 
