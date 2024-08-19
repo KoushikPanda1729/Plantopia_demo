@@ -302,9 +302,7 @@
         margin: 0 auto;
     }
 
-    .login-heading {
-        font-size: 1.2rem;
-    }
+
 
     .login-input {
         font-size: 0.9rem;
@@ -318,9 +316,7 @@
 
 @media (max-width: 480px) {
 
-    .login-heading {
-        font-size: 1rem;
-    }
+
 
     .login-input {
         font-size: 0.8rem;
