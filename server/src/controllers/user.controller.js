@@ -174,95 +174,103 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res, _) => {
-  //Get details from users
-  const { userName, email, password, fullName, address, role, answer } =
-    req.body;
-  //Check validation
-  if (
-    [userName, email, password, fullName, address, role, answer].some(
-      (field) => field?.trim() === ""
-    )
-  ) {
-    throw new ApiError(400, "All fields are required");
-  }
-  //check the role of user
-  if (!(role === "user" || role === "admin")) {
-    throw new ApiError(400, "Please define the correct role");
-  }
-
-  //check user is exists or not
-  const existsUser = await User.findOne({
-    $or: [{ userName }, { email }],
-  });
-
-  if (existsUser) {
-    throw new ApiError(400, "User is already exists");
-  }
-  //Local file path
-  if (!req?.file?.path) {
-    throw new ApiError(400, "Profile image is required");
-  }
-  const localFilePath = req?.file?.path;
-
-  const cloudinaryObject = await uploadOnCloudinary(localFilePath);
-  if (!cloudinaryObject) {
-    throw new ApiError(400, "Cloudinary upload error");
-  }
-  const { public_id, url } = cloudinaryObject;
-
-  const user = await User.create({
-    userName: userName.toLowerCase(),
-    email,
-    password,
-    fullName,
-    address,
-    role,
-    answer,
-    profileImage: {
-      public_id,
-      url,
-    },
-  });
-
-  if (!user) {
-    throw new ApiError(400, "User not created ");
-  }
-
-  const createdUser = await User.findById(user._id).select(
-    "-password -refreshToken -answer"
-  );
-
-  if (!createdUser) {
-    throw new ApiError(400, "Something went wrong");
-  }
-
-  user.otp = generateRandom6DigitNumber();
-  user.expireAt = Date.now() + 3 * 60 * 1000;
-  await user.save({ validateBeforeSave: false });
-
-  const userEmail = user?.email;
-  const userOTP = user?.otp;
-  await sendMail(userEmail, "Email sends for verification", userOTP);
-
-  const { accessToken, refreshToken } =
-    await generateAccessTokenAndRefreshToken(createdUser?._id);
-
-  const options = {
-    // httpOnly: true,
-    secure: true,
-  };
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
-    .cookie("img", user?.profileImage?.url, options)
-    .json(
-      new ApiResponces(
-        200,
-        { user: createdUser, accessToken, refreshToken },
-        "User logged in successfully"
+  try {
+    //Get details from users
+    const { userName, email, password, fullName, address, role, answer } =
+      req.body;
+    //Check validation
+    if (
+      [userName, email, password, fullName, address, role, answer].some(
+        (field) => field?.trim() === ""
       )
+    ) {
+      throw new ApiError(400, "All fields are required");
+    }
+    //check the role of user
+    if (!(role === "user" || role === "admin")) {
+      throw new ApiError(400, "Please define the correct role");
+    }
+
+    //check user is exists or not
+    const existsUser = await User.findOne({
+      $or: [{ userName }, { email }],
+    });
+
+    if (existsUser) {
+      throw new ApiError(400, "User is already exists");
+    }
+    //Local file path
+    if (!req?.file?.path) {
+      throw new ApiError(400, "Profile image is required");
+    }
+    const localFilePath = req?.file?.path;
+
+    const cloudinaryObject = await uploadOnCloudinary(localFilePath);
+    if (!cloudinaryObject) {
+      throw new ApiError(400, "Cloudinary upload error");
+    }
+    const { public_id, url } = cloudinaryObject;
+
+    const user = await User.create({
+      userName: userName.toLowerCase(),
+      email,
+      password,
+      fullName,
+      address,
+      role,
+      answer,
+      profileImage: {
+        public_id,
+        url,
+      },
+    });
+
+    if (!user) {
+      throw new ApiError(400, "User not created ");
+    }
+
+    const createdUser = await User.findById(user._id).select(
+      "-password -refreshToken -answer"
     );
+
+    if (!createdUser) {
+      throw new ApiError(400, "Something went wrong");
+    }
+
+    user.otp = generateRandom6DigitNumber();
+    user.expireAt = Date.now() + 3 * 60 * 1000;
+    await user.save({ validateBeforeSave: false });
+
+    const userEmail = user?.email;
+    const userOTP = user?.otp;
+    await sendMail(userEmail, "Email sends for verification", userOTP);
+
+    const { accessToken, refreshToken } =
+      await generateAccessTokenAndRefreshToken(createdUser?._id);
+
+    const options = {
+      // httpOnly: true,
+      secure: true,
+    };
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .cookie("img", user?.profileImage?.url, options)
+      .json(
+        new ApiResponces(
+          200,
+          { user: createdUser, accessToken, refreshToken },
+          "User logged in successfully"
+        )
+      );
+  } catch (error) {
+    return res
+      .status(400)
+      .json(
+        new ApiResponces(400, { error }, "Some error occured in regitration")
+      );
+  }
 });
 
 const updateSecurityKeyAndAddress = asyncHandler(async (req, res) => {
