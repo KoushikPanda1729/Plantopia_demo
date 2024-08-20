@@ -94,7 +94,7 @@ const Register = () => {
       }
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
-      window.location.href = "/login";
+      // window.location.href = "/login";
       setAlreadyExists(true);
     } finally {
       setLoading(false);
