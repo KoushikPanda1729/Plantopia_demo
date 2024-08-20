@@ -221,17 +221,22 @@ body {
         /* Center horizontally */
     }
 
+    .social-container {
+        margin-left: -6px;
+    }
+
     .social-container,
     .register-form {
+
         width: 100%;
         margin-bottom: 20px;
         max-width: none;
-        /* Remove max-width on small screens */
+
         height: auto;
         /* Allow height to be auto on small screens */
     }
 
     .social-container {
-        height: 70vh;
+        height: 58vh;
     }
 }

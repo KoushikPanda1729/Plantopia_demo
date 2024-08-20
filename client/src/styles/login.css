@@ -12,6 +12,7 @@
     max-height: 100vh;
     padding: 20px;
     flex-direction: row;
+    margin-top: 2rem;
 }
 
 /* Social Login Section and Form Section */
@@ -37,7 +38,6 @@
 /* Specific Styles for Social Login Section */
 .social {
     margin-right: 20px;
-    /* Space between social and form sections */
     background-color: #e3f2fd;
 }
 
@@ -214,9 +214,13 @@
 @media (max-width: 768px) {
     .login-container {
         flex-direction: column;
-        /* Stack social and form sections vertically on small screens */
         align-items: center;
-        /* Center horizontally */
+        justify-content: center;
+        margin-top: 10rem;
+    }
+
+    .social {
+        margin-left: 12px;
     }
 
     .social,
@@ -224,7 +228,10 @@
         width: 100%;
         margin-bottom: 20px;
         max-width: none;
-        /* Remove max-width on small screens */
+    }
+
+    .social {
+        height: 60vh;
     }
 
     .login-social-container {
