@@ -1,0 +1,145 @@
+/* Container */
+.profile-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Profile Card */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Profile Image */
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+/* Profile Info */
+.profile-info {
+    width: 100%;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profile-info p {
+    font-size: 16px;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+/* Update Section */
+.update-section {
+    margin-top: 20px;
+}
+
+.update-section h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.input-file,
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Password Input Container */
+.password-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-input-container .input-field {
+    flex: 1;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+.profile-image-preview {
+    width: 10%;
+    height: 10%;
+    object-fit: cover;
+}
+
+.update-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: indigo;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 15px;
+    }
+
+    .profile-info h2 {
+        font-size: 20px;
+    }
+
+    .profile-info p {
+        font-size: 14px;
+    }
+
+    .update-section h3 {
+        font-size: 18px;
+    }
+
+    .profile-image {
+        width: 80px;
+        height: 80px;
+        justify-content: left;
+        margin-bottom: 3rem;
+        border: 3px solid green;
+    }
+}
+
+@media (max-width: 350px) {
+    .profile-header {
+        display: flex;
+        flex-direction: column;
+    }
+}

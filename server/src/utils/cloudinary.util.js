@@ -37,6 +37,8 @@ const uploadOnCloudinaryForGoogle = async (googleURL) => {
 };
 const deleteOnCloudinary = async (publicId) => {
   try {
+    console.log(publicId);
+
     if (!publicId) return null;
     await cloudinary.uploader.destroy(publicId);
     return;

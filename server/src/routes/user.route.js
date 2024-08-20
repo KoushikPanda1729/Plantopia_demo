@@ -30,13 +30,14 @@ userRouter.route("/login").post(logInUser);
 userRouter
   .route("/update-address-security")
   .post(verifyJWT, updateSecurityKeyAndAddress);
-userRouter.route("/logout").post(verifyJWT, userLoggOut);
+  userRouter.route("/logout").post(verifyJWT, userLoggOut);
+  userRouter.route("/get-user").get(verifyJWT, getUser);
 userRouter.route("/refresh").post(refreshAccessToken);
 userRouter.route("/update-password").post(verifyJWT, updateProfile);
 userRouter
   .route("/update-profile-image")
   .post(verifyJWT, upload.single("profileImage"), updateProfileImage);
-userRouter.route("/get-user").get(verifyJWT, getUser);
+
 userRouter.route("/forgot").post(forgotPasswordWithAnswer);
 userRouter.route("/sentOTP").post(sendEmailWithOTP);
 userRouter.route("/forgotOTP").post(forgotPasswordWithOTP);

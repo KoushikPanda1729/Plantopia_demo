@@ -519,8 +519,15 @@ const updateProfileImage = asyncHandler(async (req, res) => {
   );
 
   await deleteOnCloudinary(req?.user?.profileImage?.public_id);
+  const options = {
+    // httpOnly: true,
+    secure: true,
+  };
   return res
     .status(200)
+    .cookie("accessToken", req.cookies?.accessToken, options)
+    .cookie("refreshToken", req.cookies?.refreshToken, options)
+    .cookie("img", url, options)
     .json(new ApiResponces(200, {}, "Profile image updated successfully"));
 });
 
