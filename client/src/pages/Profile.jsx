@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { requireAuth } from "../utils/requireAuth";
 import axios from "axios";
-import { Form, useLoaderData, useNavigation } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import "../styles/profile.css";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import icons for the eye
+import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 export const profileLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);

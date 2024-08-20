@@ -11,6 +11,7 @@ import "../index.css";
 import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
 import { getUser } from "../utils/getUser";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const registerLoader = async () => {
   const user = await getUser();
@@ -28,8 +29,7 @@ export const registerAction = async ({ request }) => {
     return redirect("/verify-account");
   } catch (error) {
     console.log(error);
-    console.log("Already registerd:", error.message);
-    // return redirect("/login");
+    console.log("Already registered:", error.message);
     return { data: null };
   }
 };
@@ -38,6 +38,8 @@ const Register = () => {
   const { state } = useNavigation();
   const isSubmitting = state === "submitting";
   const [profileImagePreview, setProfileImagePreview] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConPassword, setShowConPassword] = useState(false);
   const data = useActionData();
 
   const handleProfileImageChange = (e) => {
@@ -51,6 +53,13 @@ const Register = () => {
     } else {
       setProfileImagePreview(null);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const togglePasswordVisibilityConfirm = () => {
+    setShowConPassword(!showConPassword);
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
@@ -93,7 +102,6 @@ const Register = () => {
       }
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
-      // window.location.href = "/login";
       setAlreadyExists(true);
     } finally {
       setLoading(false);
@@ -103,19 +111,21 @@ const Register = () => {
   const handleGoogleError = () => {
     console.log("Google Login Failed");
   };
+
   const [loading, setLoading] = useState(false);
   const [alreadyExists, setAlreadyExists] = useState(false);
+
   return (
     <div className="register-container">
       <div className="social-container">
         <div className="goto-signIn">
-          Already sign up ?{" "}
+          Already sign up?{" "}
           <span>
             <NavLink to={"/login"}>Sign in</NavLink>
           </span>
         </div>
         <div className="signUp">
-          <h1>Sign up via </h1>
+          <h1>Sign up via</h1>
           <p>
             Welcome to Plantopia, where every leaf and petal tells a story! 🌿🌺
           </p>
@@ -141,7 +151,7 @@ const Register = () => {
         </div>
         {alreadyExists && (
           <span className="redirect-login-register">
-            Already signup go to <NavLink to={"/login"}>Sign in </NavLink>
+            Already signed up? Go to <NavLink to={"/login"}>Sign in</NavLink>
           </span>
         )}
       </div>
@@ -185,16 +195,43 @@ const Register = () => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group password-field">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            autoComplete="off"
-            required
-            className="form-control"
-          />
+          <div className="password-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              autoComplete="off"
+              required
+              className="form-control password-view"
+            />
+            <span
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+        </div>
+        <div className="form-group password-field">
+          <label htmlFor="password">Confirm Password</label>
+          <div className="password-container">
+            <input
+              type={showConPassword ? "text" : "password"}
+              name="password"
+              id="password"
+              autoComplete="off"
+              required
+              className="form-control password-view"
+            />
+            <span
+              className="password-toggle"
+              onClick={togglePasswordVisibilityConfirm}
+            >
+              {showConPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
 
         <div className="form-group">
@@ -244,14 +281,6 @@ const Register = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <select name="role" id="role" required className="form-control">
-            <option value="user">User</option>
-            {/* <option value="admin">Admin</option> */}
-          </select>
-        </div>
-
-        <div className="form-group">
           <label htmlFor="answer">Security Key</label>
           <input
             type="text"
@@ -273,7 +302,7 @@ const Register = () => {
         </div>
         {data?.data === null && (
           <p className="redirect-to-login">
-            User Already registered go to{" "}
+            User already registered. Go to{" "}
             <NavLink to={"/login"}>Sign in</NavLink>{" "}
           </p>
         )}

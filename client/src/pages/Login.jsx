@@ -13,6 +13,7 @@ import { getUser } from "../utils/getUser";
 import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -85,6 +86,7 @@ const Login = () => {
   };
   const [loading, setLoading] = useState(false);
   const [notExists, setNotExists] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <>
       <Form method="POST" action={loginURL} replace className="login-form">
@@ -161,14 +163,23 @@ const Login = () => {
             </div>
             <div className="login-field">
               <label htmlFor="">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                autoComplete="off"
-                required
-                className="login-input"
-              />
+              <div className="password-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  autoComplete="off"
+                  required
+                  className="login-input pass"
+                />
+                <p
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="toggle-password"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </p>
+              </div>
               <p className="forgot-password">
                 <NavLink to={"/forgot-password"}>Forgot password ?</NavLink>
               </p>
