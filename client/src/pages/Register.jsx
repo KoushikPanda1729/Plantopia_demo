@@ -29,6 +29,7 @@ export const registerAction = async ({ request }) => {
     await axios.post(`/api/v1/users/register`, formData);
     return redirect("/verify-account");
   } catch (error) {
+    console.log(error);
     console.log("Already registerd:", error.message);
     // return redirect("/login");
     return { data: null };
