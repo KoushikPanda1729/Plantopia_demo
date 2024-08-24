@@ -76,7 +76,8 @@ ul li a:hover {
 }
 
 .get-into:active,
-.get-start:active {
+.get-start:active,
+.dashboard:active {
     color: green;
     border: 1px solid green;
     border-radius: 0.2rem;

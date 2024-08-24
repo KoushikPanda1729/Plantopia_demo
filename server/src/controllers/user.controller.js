@@ -106,6 +106,7 @@ const registerWithGoogle = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .cookie("img", createdUser?.profileImage?.url, options)
+    .cookie("role", createdUser?.role, options)
     .json(
       new ApiResponces(
         200,
@@ -164,6 +165,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .cookie("img", loggedInUser?.profileImage.url, options)
+    .cookie("role", loggedInUser?.role, options)
     .json(
       new ApiResponces(
         200,
@@ -256,12 +258,13 @@ const registerUser = asyncHandler(async (req, res, _) => {
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .cookie("img", user?.profileImage?.url, options)
+      .cookie("img", createdUser?.profileImage?.url, options)
+      .cookie("role", createdUser?.role, options)
       .json(
         new ApiResponces(
           200,
           { user: createdUser, accessToken, refreshToken },
-          "User logged in successfully"
+          "User Registerd  successfully"
         )
       );
   } catch (error) {
@@ -390,6 +393,7 @@ const logInUser = asyncHandler(async (req, res) => {
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .cookie("img", loggedInUser?.profileImage?.url, options)
+    .cookie("role", loggedInUser?.role, options)
     .json(
       new ApiResponces(
         200,
@@ -425,6 +429,7 @@ const userLoggOut = asyncHandler(async (req, res, _) => {
     .clearCookie("refreshToken", options)
     .clearCookie("accessToken", options)
     .clearCookie("img", options)
+    .clearCookie("role", options)
     .json(new ApiResponces(200, {}, "User logged out successfully"));
 });
 
@@ -528,7 +533,7 @@ const updateProfileImage = asyncHandler(async (req, res) => {
     .cookie("accessToken", req.cookies?.accessToken, options)
     .cookie("refreshToken", req.cookies?.refreshToken, options)
     .cookie("img", url, options)
-    .json(new ApiResponces(200, {}, "Profile image updated successfully"));
+    .json(new ApiResponces(200, { url }, "Profile image updated successfully"));
 });
 
 const getUser = asyncHandler(async (req, res) => {

@@ -12,7 +12,9 @@ app.use(express.urlencoded({ limit: "20kb", extended: true }));
 app.use(express.json({ limit: "20kb" }));
 app.use(express.static("public"));
 import userRouter from "./routes/user.route.js";
+import categoryRouter from "./routes/category.route.js";
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/category", categoryRouter);
 
 export default app;

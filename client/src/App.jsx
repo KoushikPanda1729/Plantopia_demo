@@ -7,7 +7,6 @@ import {
 import RootLayout from "./layouts/RootLayout";
 import {
   Home,
-  About,
   Profile,
   Login,
   Register,
@@ -42,6 +41,10 @@ import {
   setSecurityAndAddressAction,
   setSecurityAndAddressLoader,
 } from "./pages/SetSecurityAndAddress";
+import Dashboard from "./pages/Dashboard";
+import CreateCategory, { createCategoryAction } from "./pages/CreateCategory";
+import CreateProduct, { createProductAction } from "./pages/CreateProduct";
+import Orders from "./pages/Orders";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
@@ -60,7 +63,22 @@ const router = createBrowserRouter(
         loader={loginLoader}
       />
       <Route path="/account" element={<Account />} loader={accountLoader} />
-      <Route path="/about" element={<About />} />
+
+      {/* dashboard  */}
+
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/dashboard/create-category"
+          element={<CreateCategory />}
+          action={createCategoryAction}
+        />
+        <Route
+          path="/dashboard/create-product"
+          element={<CreateProduct />}
+          action={createProductAction}
+        />
+        <Route path="/dashboard/order" element={<Orders />} />
+      </Route>
       <Route path="/profile" element={<Profile />} loader={profileLoader} />
       <Route path="*" element={<Errorpage />} />
       <Route path="/logout" action={logoutAction} />

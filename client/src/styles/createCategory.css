@@ -1,0 +1,82 @@
+/* Container styling */
+.create-category-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Form styling */
+.category-form {
+    display: flex;
+    justify-content: space-between;
+    /* Align input and button in a row */
+    align-items: center;
+    gap: 15px;
+}
+
+.category-input {
+    flex: 1;
+    /* Allow input to take up available space */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+/* Category list styling */
+.category-list {
+    margin-top: 30px;
+    max-height: 400px;
+    /* Set max height for scrollable area */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    padding-right: 10px;
+    /* Add padding to avoid scrollbar overlap */
+}
+
+/* Category item styling */
+.category-list>div {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .create-category-container {
+        padding: 15px;
+    }
+
+    .category-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .category-input {
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+    }
+}

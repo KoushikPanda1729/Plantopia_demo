@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { requireAuth } from "../utils/requireAuth";
 import axios from "axios";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useOutletContext } from "react-router-dom";
 import "../styles/profile.css";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const profileLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);
@@ -14,40 +14,45 @@ export const profileLoader = async ({ request }) => {
 
 const Profile = () => {
   const data = useLoaderData();
+  const { updateUserProfileImage } = useOutletContext();
 
   const email = data?.data?.email;
+  const role = data?.data?.role;
   const fullName = data?.data?.fullName;
   const address = data?.data?.address;
   const userName = data?.data?.userName;
-  const profileImage = data?.data?.profileImage?.url;
+  const initialImage = data?.data?.profileImage?.url;
 
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
-  const [profileImageFile, setProfileImageFile] = useState("");
+  const [profileImageFile, setProfileImageFile] = useState(null);
   const [profileImagePreview, setProfileImagePreview] = useState(null);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [loadingPassword, setIsLoadingPassword] = useState(false);
-  const [invalidCredencial, setInvalidCredencial] = useState(false);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
   const [successUpdate, setSuccessUpdate] = useState(false);
+  const [profileImage, setProfileImage] = useState(initialImage);
+
+  useEffect(() => {
+    setProfileImage(initialImage);
+  }, [initialImage]);
 
   const handlePasswordChange = async () => {
     setIsLoadingPassword(true);
-    const credencials = {
+    const credentials = {
       newPassword,
       oldPassword,
     };
     try {
-      const responce = await axios.post(
+      const response = await axios.post(
         `/api/v1/users/update-password`,
-        credencials
+        credentials
       );
       setSuccessUpdate(true);
-      return { data: responce.data };
     } catch (error) {
-      setInvalidCredencial(true);
-      return { data: error };
+      setInvalidCredentials(true);
     } finally {
       setNewPassword("");
       setOldPassword("");
@@ -71,7 +76,7 @@ const Profile = () => {
   const handleProfileImageChange = async () => {
     if (!profileImageFile) {
       console.error("No file selected.");
-      setInvalidCredencial(true);
+      setInvalidCredentials(true);
       return;
     }
 
@@ -80,15 +85,16 @@ const Profile = () => {
       const formData = new FormData();
       formData.append("profileImage", profileImageFile);
 
-      const responce = await axios.post(
+      const response = await axios.post(
         `/api/v1/users/update-profile-image`,
         formData
       );
+      const newImageUrl = response?.data?.data?.url;
+      setProfileImage(newImageUrl);
+      updateUserProfileImage(newImageUrl);
       setSuccessUpdate(true);
-      return { data };
     } catch (error) {
-      setInvalidCredencial(true);
-      return { data: error };
+      setInvalidCredentials(true);
     } finally {
       setProfileImagePreview(null);
       setIsLoading(false);
@@ -108,6 +114,7 @@ const Profile = () => {
 
             <p>{email}</p>
             <p>{address}</p>
+            {role === "admin" && <p>{role}</p>}
           </div>
         </div>
 
@@ -161,7 +168,7 @@ const Profile = () => {
             <div className="password-input-container">
               <input
                 required
-                type={showNewPassword ? "text" : "password"} // Toggle between text and password
+                type={showNewPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Enter new password"
@@ -181,13 +188,13 @@ const Profile = () => {
               className="update-btn"
               disabled={loadingPassword}
             >
-              {loadingPassword ? "Updatin..." : " Update Password"}
+              {loadingPassword ? "Updating..." : "Update Password"}
             </button>
           </Form>
         </div>
-        {invalidCredencial && (
+        {invalidCredentials && (
           <h3 style={{ padding: "1rem", fontSize: "1.3rem", color: "red" }}>
-            Note: Invalid Credincials
+            Note: Invalid Credentials
           </h3>
         )}
         {successUpdate && (

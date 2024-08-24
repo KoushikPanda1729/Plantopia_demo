@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { Form, NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import "../styles/nav.css";
 
-
 const RootLayout = () => {
-  const user = useRouteLoaderData("parentId");
+  const userData = useRouteLoaderData("parentId");
+  const [user, setUser] = useState(userData);
+
+  const updateUserProfileImage = (newImageUrl) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      img: newImageUrl,
+    }));
+  };
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -33,18 +40,18 @@ const RootLayout = () => {
             <span></span>
           </div>
           <ul className={`nav-list ${menuOpen ? "open" : ""}`}>
-            {!user && (
+            {!userData && (
               <li className="nav-item get-into">
                 <NavLink to={"/login"}>Sign In</NavLink>
               </li>
             )}
-            {!user && (
+            {!userData && (
               <li className="nav-item get-start">
                 <NavLink to={"/register"}>Get Started</NavLink>
               </li>
             )}
 
-            {user && (
+            {userData && (
               <li className="nav-item image">
                 <NavLink to={"/profile"}>
                   {" "}
@@ -52,14 +59,21 @@ const RootLayout = () => {
                 </NavLink>
               </li>
             )}
-            {user && (
+
+            {userData && user?.role === "admin" && (
+              <li className="nav-item dashboard">
+                <NavLink to={"/dashboard"}>Dashboard</NavLink>
+              </li>
+            )}
+
+            {userData && (
               <Form method="POST" action="/logout" className="logout-form">
                 <button className="logout-button">Logout</button>
               </Form>
             )}
           </ul>
         </nav>
-        <Outlet />
+        <Outlet context={{ updateUserProfileImage }} />
       </main>
     </>
   );

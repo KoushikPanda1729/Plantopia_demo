@@ -1,0 +1,91 @@
+/* Container styling for category item */
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Category details styling */
+.category-details {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Remove default styles for input fields */
+.category-name input {
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    background: none;
+    color: #333;
+    padding: 0.5rem;
+    margin: 0;
+    box-shadow: none;
+    width: auto;
+}
+
+/* Category slug styling */
+.category-slug {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Action buttons styling */
+.category-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 1rem;
+}
+
+.update-btn,
+.delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.update-btn {
+    background-color: green;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .category-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .category-actions {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    .update-btn,
+    .delete-btn {
+        width: 48%;
+        /* Buttons take half the width on small screens */
+    }
+}
