@@ -41,7 +41,7 @@ import {
   setSecurityAndAddressAction,
   setSecurityAndAddressLoader,
 } from "./pages/SetSecurityAndAddress";
-import Dashboard from "./pages/Dashboard";
+import Dashboard, { dashboardLoader } from "./pages/Dashboard";
 import CreateCategory, { createCategoryAction } from "./pages/CreateCategory";
 import CreateProduct, { createProductAction } from "./pages/CreateProduct";
 import Orders from "./pages/Orders";
@@ -66,7 +66,7 @@ const router = createBrowserRouter(
 
       {/* dashboard  */}
 
-      <Route path="/dashboard" element={<Dashboard />}>
+      <Route path="/dashboard" element={<Dashboard />} loader={dashboardLoader}>
         <Route
           path="/dashboard/create-category"
           element={<CreateCategory />}

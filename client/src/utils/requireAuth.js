@@ -7,3 +7,10 @@ export const requireAuth = async (redirectTo) => {
     throw redirect(`/login?redirectTo=${redirectTo}`);
   }
 };
+
+export const requireAuthAdmin = async (redirectTo) => {
+  const user = await getUser();
+  if (!(user && user?.role === "admin")) {
+    throw redirect(`/login?redirectTo=${redirectTo}`);
+  }
+};

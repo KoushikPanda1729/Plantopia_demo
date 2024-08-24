@@ -1,13 +1,13 @@
 import "../styles/dashboard.css";
-import React, { useState } from "react";
-import { redirect, Outlet, NavLink } from "react-router-dom";
+import React from "react";
+import { Outlet, NavLink } from "react-router-dom";
+import { requireAuthAdmin } from "../utils/requireAuth";
 
-// export const dashboardLoader = async () => {
-//   if (!user || user.role !== "admin") {
-//     return redirect("/login");
-//   }
-//   return user;
-// };
+export const dashboardLoader = async ({ request }) => {
+  const { pathname } = new URL(request.url);
+  await requireAuthAdmin(pathname);
+  return null;
+};
 
 const Dashboard = () => {
   return (
