@@ -178,8 +178,16 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res, _) => {
   try {
     //Get details from users
-    const { userName, email, password, fullName, address, role, answer } =
-      req.body;
+    const {
+      userName,
+      email,
+      password,
+      fullName,
+      address,
+      role = "user",
+      answer,
+    } = req.body;
+
     //Check validation
     if (
       [userName, email, password, fullName, address, role, answer].some(

@@ -223,8 +223,8 @@ const Register = () => {
           <div className="password-container">
             <input
               type={showConPassword ? "text" : "password"}
-              name="password"
-              id="password"
+              name="confirm-password"
+              id="confirm-password"
               autoComplete="off"
               required
               className="form-control password-view"
