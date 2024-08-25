@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/allcategory.css";
+import image from "../styles/image/spinner-white.svg";
 
 const AllCategory = ({ _id, name, slug, deleteCategory, updateCategory }) => {
   const [categoryName, setCategoryName] = useState(name);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const focusRef = useRef(null);
 
@@ -38,10 +40,18 @@ const AllCategory = ({ _id, name, slug, deleteCategory, updateCategory }) => {
       </div>
       <div className="category-actions">
         <button className="update-btn" onClick={handleUpdateClick}>
-          {isUpdate ? "Save" : "Update"}
+          {isUpdate ? "Save" : "Edit"}
         </button>
-        <button className="delete-btn" onClick={() => deleteCategory(_id)}>
-          Delete
+        <button
+          disabled={loading}
+          className="delete-btn"
+          onClick={() => deleteCategory(_id, setIsLoading)}
+        >
+          {!loading ? (
+            "Remove"
+          ) : (
+            <img className="spinner-green" src={image} alt="spinner" />
+          )}
         </button>
       </div>
     </div>

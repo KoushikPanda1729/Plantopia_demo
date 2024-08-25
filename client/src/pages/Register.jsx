@@ -12,6 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
 import { getUser } from "../utils/getUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import image from "../styles/image/spinner-white.svg";
 
 export const registerLoader = async () => {
   const user = await getUser();
@@ -132,7 +133,10 @@ const Register = () => {
           <div className="signUp-content">
             {loading ? (
               <span className="submitting-button">
-                <div>Please wait .....</div>{" "}
+                <div className="wait-spinner">
+                  <p>Please wait .....</p>
+                  <img className="spinner" src={image} alt="spinner" />
+                </div>{" "}
               </span>
             ) : (
               <GoogleLogin
@@ -292,13 +296,17 @@ const Register = () => {
           />
         </div>
 
-        <div className="form-group">
-          <input
-            type="submit"
-            value={isSubmitting ? "Submitting..." : "Submit"}
-            disabled={isSubmitting}
-            className="submit-button"
-          />
+        <div className="login-submit">
+          <button type="submit" disabled={isSubmitting} className="loginButton">
+            {isSubmitting ? (
+              <div className="loading-wrapper wait-spinner-login">
+                <p>Please Wait...</p>
+                <img className="spinner-green" src={image} alt="spinner" />
+              </div>
+            ) : (
+              "Sign In"
+            )}
+          </button>
         </div>
         {data?.data === null && (
           <p className="redirect-to-login">

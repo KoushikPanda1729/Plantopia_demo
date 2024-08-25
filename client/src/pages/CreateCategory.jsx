@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Form, useNavigation } from "react-router-dom";
+import { Form } from "react-router-dom";
 import AllCategory from "./AllCategory";
 import "../styles/createCategory.css";
+import image from "../styles/image/spinner-white.svg";
 
 export const createCategoryAction = async ({ request }) => {
   const data = await request.formData();
@@ -25,6 +26,7 @@ export const createCategoryAction = async ({ request }) => {
 const CreateCategory = () => {
   const [categoryName, setCategoryName] = useState("");
   const [allCategory, setAllCategory] = useState([]);
+  const [loading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +45,7 @@ const CreateCategory = () => {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const response = await axios.post(`/api/v1/category/create-category`, {
         name: categoryName,
       });
@@ -56,11 +59,14 @@ const CreateCategory = () => {
       }
     } catch (error) {
       console.error("Error adding category:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const deleteCategory = async (id) => {
+  const deleteCategory = async (id, setIsLoading) => {
     try {
+      setIsLoading(true);
       const { data } = await axios.delete(
         `/api/v1/category/delete-category/${id}`
       );
@@ -69,6 +75,8 @@ const CreateCategory = () => {
       );
     } catch (error) {
       console.error("Error deleting category:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,7 +113,13 @@ const CreateCategory = () => {
           className="category-input"
           placeholder="Enter Category Name"
         />
-        <input type="submit" value="Add" className="submit-btn" />
+        <button disabled={loading} type="submit" className="submit-btn">
+          {!loading ? (
+            "Add"
+          ) : (
+            <img className="spinner-green" src={image} alt="spinner" />
+          )}
+        </button>
       </Form>
 
       <div className="category-list">

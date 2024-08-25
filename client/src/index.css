@@ -116,12 +116,13 @@ body {
 
 .register-title {
     text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 0.7rem;
 }
 
 .plant-register {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     display: block;
     margin: 0 auto;
 }
@@ -163,7 +164,7 @@ body {
 }
 
 .preview-image {
-    max-width: 100%;
+    max-width: 20%;
     height: auto;
     border-radius: 4px;
 }
@@ -231,9 +232,7 @@ body {
         width: 100%;
         margin-bottom: 20px;
         max-width: none;
-
         height: auto;
-        /* Allow height to be auto on small screens */
     }
 
     .social-container {

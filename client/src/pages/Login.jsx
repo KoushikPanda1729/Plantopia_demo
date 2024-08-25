@@ -14,8 +14,7 @@ import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import image from "../styles/image/spinner.gif";
-import image1 from "../styles/image/spinner-white.gif";
+import image from "../styles/image/spinner-white.svg";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -199,7 +198,7 @@ const Login = () => {
                 {isSubmitting ? (
                   <div className="loading-wrapper wait-spinner-login">
                     <p>Please Wait...</p>
-                    <img className="spinner-green" src={image1} alt="spinner" />
+                    <img className="spinner-green" src={image} alt="spinner" />
                   </div>
                 ) : (
                   "Sign In"

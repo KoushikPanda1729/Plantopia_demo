@@ -4,6 +4,7 @@ import axios from "axios";
 import { Form, useLoaderData, useOutletContext } from "react-router-dom";
 import "../styles/profile.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import image from "../styles/image/spinner-white.svg";
 
 export const profileLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);
@@ -139,7 +140,14 @@ const Profile = () => {
             className="update-btn"
             disabled={loading}
           >
-            {loading ? "Updating..." : "Update Image"}
+            {loading ? (
+              <div className="loading-wrapper wait-spinner-login">
+                <p>Please Wait...</p>
+                <img className="spinner-green" src={image} alt="spinner" />
+              </div>
+            ) : (
+              "Update"
+            )}
           </button>
         </div>
 
@@ -188,7 +196,14 @@ const Profile = () => {
               className="update-btn"
               disabled={loadingPassword}
             >
-              {loadingPassword ? "Updating..." : "Update Password"}
+              {loadingPassword ? (
+                <div className="loading-wrapper wait-spinner-login">
+                  <p>Please Wait...</p>
+                  <img className="spinner-green" src={image} alt="spinner" />
+                </div>
+              ) : (
+                "Update Password"
+              )}
             </button>
           </Form>
         </div>
