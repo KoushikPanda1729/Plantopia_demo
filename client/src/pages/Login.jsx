@@ -14,6 +14,8 @@ import { jwtDecode } from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import image from "../styles/image/spinner.gif";
+import image1 from "../styles/image/spinner-white.gif";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -105,10 +107,14 @@ const Login = () => {
                 Welcome to Plantopia, where every leaf and petal tells a story!
                 🌿🌺
               </span>
+
               <div className="login-social-option">
                 {loading ? (
                   <span className="submitting-button">
-                    <div>Please wait .....</div>{" "}
+                    <div className="wait-spinner">
+                      <p>Please wait...</p>
+                      <img className="spinner" src={image} alt="spinner" />
+                    </div>{" "}
                   </span>
                 ) : (
                   <GoogleLogin
@@ -185,12 +191,20 @@ const Login = () => {
               </p>
             </div>
             <div className="login-submit">
-              <input
+              <button
                 type="submit"
-                value={`${isSubmitting ? "Submitting..." : "sign In"}`}
                 disabled={isSubmitting}
                 className="loginButton"
-              />
+              >
+                {isSubmitting ? (
+                  <div className="loading-wrapper wait-spinner-login">
+                    <p>Please Wait...</p>
+                    <img className="spinner-green" src={image1} alt="spinner" />
+                  </div>
+                ) : (
+                  "Sign In"
+                )}
+              </button>
             </div>
             <div className="goto-Register">
               Don't have an account?{" "}

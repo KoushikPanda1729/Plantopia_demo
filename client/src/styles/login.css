@@ -98,9 +98,34 @@
     color: #2e7d32;
     margin-top: 10px;
     text-align: left;
-    /* Left-align text */
     width: 100%;
-    /* Full width for label container */
+}
+
+
+.wait-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 0 0.6rem;
+    border-radius: 0.4rem;
+}
+.wait-spinner-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.spinner-green {
+    height: 40px;
+    width: 40px;
+}
+
+.spinner {
+    mix-blend-mode: multiply;
+    height: 40px;
+    width: 40px;
 }
 
 .plant-register img {
