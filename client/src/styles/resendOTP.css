@@ -37,6 +37,10 @@ body {
     color: #555;
 }
 
+
+.form-group input{
+    width: 100%;
+}
 /* Input field styling */
 .form-input {
     width: 100%;

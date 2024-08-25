@@ -3,6 +3,7 @@ import React from "react";
 import { Form, redirect, useNavigation } from "react-router-dom";
 import "../styles/resendOTP.css";
 import { getUser } from "../utils/getUser";
+import image from "../styles/image/spinner-white.svg";
 
 export const resendOTPForgotLoader = async () => {
   const user = await getUser();
@@ -49,12 +50,16 @@ const SendEmailForgotPassword = () => {
             required
           />
         </div>
-        <input
-          type="submit"
-          className="submit-button"
-          value={isSubmitting ? "Sending..." : "Send OTP"}
-          disabled={isSubmitting}
-        />
+        <button type="submit" className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="loading-wrapper wait-spinner-login">
+              <p>Please Wait...</p>
+              <img className="spinner-green" src={image} alt="spinner" />
+            </div>
+          ) : (
+            "Send OTP"
+          )}
+        </button>
       </Form>
     </div>
   );

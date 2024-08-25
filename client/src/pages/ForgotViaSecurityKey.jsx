@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import "../styles/forgotVaiSecurityKey.css";
 import { getUser } from "../utils/getUser";
+import image from "../styles/image/spinner-white.svg";
 
 export const forgotViaSecurityKeyLoader = async () => {
   const user = await getUser();
@@ -51,7 +52,7 @@ const ForgotViaSecurityKey = () => {
 
   return (
     <div className="forgot-container">
-        <h3>Forgot password</h3>
+      <h3>Forgot password</h3>
       <Form method="POST" action="/forgot-via-securityKey" replace>
         <div className="email">
           <label>Email</label>
@@ -77,11 +78,20 @@ const ForgotViaSecurityKey = () => {
           />
         </div>
         <div>
-          <input
+          <button
             type="submit"
-            value={`${isSubmitting ? "Submitting..." : "Forgot password"}`}
+            className="submit-button" // Add or update this class for styling
             disabled={isSubmitting}
-          />
+          >
+            {isSubmitting ? (
+              <div className="loading-wrapper wait-spinner-login">
+                <p>Please Wait...</p>
+                <img className="spinner-green" src={image} alt="spinner" />
+              </div>
+            ) : (
+              "Forgot password"
+            )}
+          </button>
         </div>
         {data && (
           <p className="goto-login">

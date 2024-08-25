@@ -1,8 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  NavLink,
+  redirect,
+  useActionData,
+  useNavigation,
+} from "react-router-dom";
 import "../styles/newPassword.css";
 import { getUser } from "../utils/getUser";
+import image from "../styles/image/spinner-white.svg";
 
 export const newPasswordLoader = async () => {
   const user = await getUser();
@@ -33,6 +40,7 @@ const NewPassword = () => {
   const [timeLeft, setTimeLeft] = useState(180);
   const { state } = useNavigation();
   const isSubmitting = state === "submitting";
+  const [resending, setResending] = useState(false);
   const focusInput = useRef();
 
   useEffect(() => {
@@ -50,6 +58,19 @@ const NewPassword = () => {
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
+
+  const handleResendOTP = async () => {
+    setResending(true);
+    try {
+      await axios.post("/api/v1/users/resend-otp"); // Adjust API endpoint as needed
+      setTimeLeft(180); // Reset timer
+    } catch (error) {
+      console.log("Error occurred while resending OTP:", error.message);
+    } finally {
+      setResending(false);
+    }
+  };
+
   return (
     <div className="verify-container">
       <h2>Verify OTP</h2>
@@ -75,11 +96,29 @@ const NewPassword = () => {
           <input type="password" name="password" autoComplete="off" required />
         </div>
         <div>
-          <input
+          <button
             type="submit"
-            value={isSubmitting ? "Submitting..." : "Submit"}
+            className="submit-button"
             disabled={isSubmitting || timeLeft === 0}
-          />
+          >
+            {isSubmitting ? (
+              <div className="loading-wrapper wait-spinner-login">
+                <p>Please Wait...</p>
+                <img className="spinner-green" src={image} alt="spinner" />
+              </div>
+            ) : (
+              "Submit"
+            )}
+          </button>
+          <NavLink to={"/resend-otp"}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={resending || timeLeft > 0}
+            >
+              {resending ? "Resending..." : "Resend OTP"}
+            </button>
+          </NavLink>
           <p>
             {timeLeft > 0
               ? `Time left: ${formatTime(timeLeft)}`

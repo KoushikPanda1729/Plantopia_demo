@@ -8,6 +8,7 @@ import {
   useNavigation,
 } from "react-router-dom";
 import "../styles/verifyAccount.css";
+import image from "../styles/image/spinner-white.svg";
 
 export const verifyAccountAction = async ({ request }) => {
   const data = await request.formData();
@@ -67,11 +68,21 @@ const VerifyAccount = () => {
           />
         </div>
         <div>
-          <input
+          <button
             type="submit"
-            value={isSubmitting ? "Submitting..." : "Submit"}
+            className="submit-button"
             disabled={isSubmitting || timeLeft === 0}
-          />
+          >
+            {isSubmitting ? (
+              <div className="loading-wrapper wait-spinner-login">
+                <p>Please Wait...</p>
+                <img className="spinner-green" src={image} alt="spinner" />
+              </div>
+            ) : (
+              "Submit"
+            )}
+          </button>
+
           <NavLink to={"/resend-otp"}>
             <input type="submit" value={"Resend OTP"} disabled={timeLeft > 0} />
           </NavLink>

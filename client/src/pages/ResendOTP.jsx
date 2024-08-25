@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Form, redirect, useNavigation } from "react-router-dom";
 import "../styles/resendOTP.css";
+import image from "../styles/image/spinner-white.svg";
 
 export const resendOTPAction = async ({ request }) => {
   const data = await request.formData();
@@ -23,7 +24,12 @@ const ResendOTP = () => {
   return (
     <div className="resend-otp-container">
       <h2>Resend OTP</h2>
-      <Form method="POST" action="/resend-otp" className="resend-otp-form" replace>
+      <Form
+        method="POST"
+        action="/resend-otp"
+        className="resend-otp-form"
+        replace
+      >
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -35,12 +41,16 @@ const ResendOTP = () => {
             required
           />
         </div>
-        <input
-          type="submit"
-          className="submit-button"
-          value={isSubmitting ? "Sending..." : "Send OTP"}
-          disabled={isSubmitting}
-        />
+        <button type="submit" className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="loading-wrapper wait-spinner-login">
+              <p>Please Wait...</p>
+              <img className="spinner-green" src={image} alt="spinner" />
+            </div>
+          ) : (
+            "Send OTP"
+          )}
+        </button>
       </Form>
     </div>
   );
