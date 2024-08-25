@@ -55,7 +55,10 @@ const RootLayout = () => {
               <li className="nav-item image">
                 <NavLink to={"/profile"}>
                   {" "}
-                  <img src={user?.img} alt="profile_logo" />{" "}
+                  <img
+                    src={!user?.img ? userData?.img : user?.img}
+                    alt="profile_logo"
+                  />{" "}
                 </NavLink>
               </li>
             )}

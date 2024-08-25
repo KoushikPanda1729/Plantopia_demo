@@ -196,6 +196,7 @@ const registerUser = asyncHandler(async (req, res, _) => {
     ) {
       throw new ApiError(400, "All fields are required");
     }
+
     //check the role of user
     if (!(role === "user" || role === "admin")) {
       throw new ApiError(400, "Please define the correct role");
@@ -205,10 +206,11 @@ const registerUser = asyncHandler(async (req, res, _) => {
     const existsUser = await User.findOne({
       $or: [{ userName }, { email }],
     });
-
+    
     if (existsUser) {
       throw new ApiError(400, "User is already exists");
     }
+
     //Local file path
     if (!req?.file?.path) {
       throw new ApiError(400, "Profile image is required");
