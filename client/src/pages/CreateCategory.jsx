@@ -5,6 +5,8 @@ import AllCategory from "./AllCategory";
 import "../styles/createCategory.css";
 import image from "../styles/image/spinner-white.svg";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export const createCategoryAction = async ({ request }) => {
   const data = await request.formData();
@@ -121,7 +123,10 @@ const CreateCategory = () => {
         />
         <button disabled={loading} type="submit" className="submit-btn">
           {!loading ? (
-            "Add"
+            <>
+              {" "}
+              <FontAwesomeIcon icon={faPlus} /> Add
+            </>
           ) : (
             <img className="spinner-green" src={image} alt="spinner" />
           )}

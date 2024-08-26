@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import "../styles/createProductForm.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
+import image from "../styles/image/spinner-white.svg";
 
 export const createProductAction = async ({ request }) => {
   const formData = await request.formData();
@@ -63,10 +66,13 @@ const CreateProduct = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axios.get("/api/v1/category/get-all-category");
         setAllCategory(data?.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -182,8 +188,22 @@ const CreateProduct = () => {
           </div>
         )}
 
-        <button type="submit" className="create-product-submit-btn">
-          Add Product
+        <button
+          type="submit"
+          disabled={loading}
+          className="create-product-submit-btn"
+        >
+          {loading ? (
+            <>
+              please wait ...{" "}
+              <img className="spinner-green" src={image} alt="spinner" />
+            </>
+          ) : (
+            <>
+              {" "}
+              <FontAwesomeIcon icon={faPlus} /> Add Product
+            </>
+          )}
         </button>
       </Form>
     </div>

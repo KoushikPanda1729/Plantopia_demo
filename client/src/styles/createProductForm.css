@@ -1,5 +1,5 @@
 .create-product-form-wrapper {
-    min-width: 500px;
+    width: 500px;
     margin: 0 auto;
     padding: 30px;
     background-color: #f8f8f8;
@@ -81,6 +81,7 @@
 @media (max-width: 1200px) {
     .create-product-form-wrapper {
         padding: 25px;
+        width: 100%;
     }
 
     .create-product-heading {

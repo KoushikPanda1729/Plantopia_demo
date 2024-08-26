@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../styles/allcategory.css";
 import image from "../styles/image/spinner-white.svg";
+import { faTrashAlt, faSave, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AllCategory = ({ _id, name, slug, deleteCategory, updateCategory }) => {
   const [categoryName, setCategoryName] = useState(name);
@@ -40,7 +42,15 @@ const AllCategory = ({ _id, name, slug, deleteCategory, updateCategory }) => {
       </div>
       <div className="category-actions">
         <button className="update-btn" onClick={handleUpdateClick}>
-          {isUpdate ? "Save" : "Edit"}
+          {isUpdate ? (
+            <>
+              <FontAwesomeIcon icon={faSave} /> Save
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faEdit} /> Edit
+            </>
+          )}
         </button>
         <button
           disabled={loading}
@@ -48,7 +58,9 @@ const AllCategory = ({ _id, name, slug, deleteCategory, updateCategory }) => {
           onClick={() => deleteCategory(_id, setIsLoading)}
         >
           {!loading ? (
-            "Remove"
+            <>
+              <FontAwesomeIcon icon={faTrashAlt} />Remove
+            </>
           ) : (
             <img className="spinner-green" src={image} alt="spinner" />
           )}
