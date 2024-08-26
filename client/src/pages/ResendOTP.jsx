@@ -3,6 +3,7 @@ import React from "react";
 import { Form, redirect, useNavigation } from "react-router-dom";
 import "../styles/resendOTP.css";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const resendOTPAction = async ({ request }) => {
   const data = await request.formData();
@@ -11,7 +12,9 @@ export const resendOTPAction = async ({ request }) => {
   };
   try {
     await axios.post(`/api/v1/users/sentOTP`, credentials);
+    toast.success("email send successfull");
   } catch (error) {
+    toast.error("Not sent");
     return null;
   }
 

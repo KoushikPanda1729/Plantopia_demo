@@ -15,6 +15,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -38,11 +39,13 @@ export const loginAction = async ({ request }) => {
 
   try {
     await axios.post(`/api/v1/users/login`, credentials);
+    toast.success("Login");
     return redirect(redirectTo);
   } catch (error) {
     if (error?.response?.data?.data?.verification) {
       return { move: true };
     } else {
+      toast.error("Invalid credentials");
       return { error: "Invalid credentials" };
     }
   }
@@ -73,10 +76,12 @@ const Login = () => {
     setLoading(true);
     try {
       const res = await axios.post(`/api/v1/users/login-google`, credentials);
+      toast.success("Login Successfull");
       window.location.href = redirectTo;
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
       setNotExists(true);
+      toast.error("User not exists");
     } finally {
       setLoading(false);
     }

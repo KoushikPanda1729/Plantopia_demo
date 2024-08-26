@@ -10,6 +10,7 @@ import {
 import "../styles/forgotVaiSecurityKey.css";
 import { getUser } from "../utils/getUser";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const forgotViaSecurityKeyLoader = async () => {
   const user = await getUser();
@@ -28,7 +29,9 @@ export const forgotViaSecurityKeyAction = async ({ request }) => {
   };
   try {
     await axios.post(`/api/v1/users/forgot`, credentials);
+    toast.success("Password Updated");
   } catch (error) {
+    toast.error("Failed");
     return false;
   }
 

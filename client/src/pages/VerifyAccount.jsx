@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import "../styles/verifyAccount.css";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const verifyAccountAction = async ({ request }) => {
   const data = await request.formData();
@@ -17,6 +18,7 @@ export const verifyAccountAction = async ({ request }) => {
   };
   try {
     const responce = await axios.post(`/api/v1/users/verify`, otp);
+    toast.success("Successfully register");
   } catch (error) {
     console.log("Error occurred at registration:", error.message);
     return null;

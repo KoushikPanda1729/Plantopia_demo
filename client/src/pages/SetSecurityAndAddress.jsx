@@ -2,6 +2,7 @@ import { Form, redirect } from "react-router-dom";
 import { requireAuth } from "../utils/requireAuth";
 import axios from "axios";
 import "../styles/setSecurityAndAddress.css";
+import toast from "react-hot-toast";
 
 export const setSecurityAndAddressLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);
@@ -17,9 +18,11 @@ export const setSecurityAndAddressAction = async ({ request }) => {
       address: data.get("address"),
     };
     await axios.post("/api/v1/users/update-address-security", credencial);
+    toast.success("Success");
     return redirect("/");
   } catch (error) {
     console.log("Error at security key : ", error);
+    toast.error("Fail");
     return { data: null };
   }
 };

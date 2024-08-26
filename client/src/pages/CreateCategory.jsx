@@ -4,6 +4,7 @@ import { Form } from "react-router-dom";
 import AllCategory from "./AllCategory";
 import "../styles/createCategory.css";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const createCategoryAction = async ({ request }) => {
   const data = await request.formData();
@@ -57,8 +58,10 @@ const CreateCategory = () => {
         ]);
         setCategoryName("");
       }
+      toast.success("Added");
     } catch (error) {
       console.error("Error adding category:", error);
+      toast.error("Failed");
     } finally {
       setIsLoading(false);
     }
@@ -73,8 +76,10 @@ const CreateCategory = () => {
       setAllCategory((prevCategories) =>
         prevCategories.filter((category) => category._id !== id)
       );
+      toast.success("Removed");
     } catch (error) {
       console.error("Error deleting category:", error);
+      toast.error("Failed");
     } finally {
       setIsLoading(false);
     }
@@ -98,6 +103,7 @@ const CreateCategory = () => {
         }
       });
     });
+    toast.success("Updated");
   };
 
   return (

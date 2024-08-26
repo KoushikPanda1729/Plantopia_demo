@@ -10,6 +10,7 @@ import {
 import "../styles/newPassword.css";
 import { getUser } from "../utils/getUser";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const newPasswordLoader = async () => {
   const user = await getUser();
@@ -28,8 +29,10 @@ export const newPasswordAction = async ({ request }) => {
 
   try {
     await axios.post(`/api/v1/users/forgotOTP`, credentials);
+    toast.success("Password updated");
   } catch (error) {
     console.log("Error occurred at registration:", error.message);
+    toast.error("Failed");
     return null;
   }
   return redirect("/login");

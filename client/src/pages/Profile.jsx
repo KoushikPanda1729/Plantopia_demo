@@ -5,6 +5,7 @@ import { Form, useLoaderData, useOutletContext } from "react-router-dom";
 import "../styles/profile.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const profileLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);
@@ -52,8 +53,10 @@ const Profile = () => {
         credentials
       );
       setSuccessUpdate(true);
+      toast.success("Password changed");
     } catch (error) {
       setInvalidCredentials(true);
+      toast.error("Failed");
     } finally {
       setNewPassword("");
       setOldPassword("");
@@ -94,8 +97,10 @@ const Profile = () => {
       setProfileImage(newImageUrl);
       updateUserProfileImage(newImageUrl);
       setSuccessUpdate(true);
+      toast.success("Profile image changed");
     } catch (error) {
       setInvalidCredentials(true);
+      toast.error("Failed");
     } finally {
       setProfileImagePreview(null);
       setIsLoading(false);

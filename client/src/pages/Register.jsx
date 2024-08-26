@@ -13,6 +13,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { getUser } from "../utils/getUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const registerLoader = async () => {
   const user = await getUser();
@@ -31,6 +32,7 @@ export const registerAction = async ({ request }) => {
   } catch (error) {
     console.log(error);
     console.log("Already registered:", error.message);
+    toast.error("User already signup");
     return { data: null };
   }
 };
@@ -104,6 +106,7 @@ const Register = () => {
     } catch (error) {
       console.log("Error occurred at registration:", error.message);
       setAlreadyExists(true);
+      toast.error("User Already SignUp");
     } finally {
       setLoading(false);
     }

@@ -4,6 +4,7 @@ import { Form, redirect, useNavigation } from "react-router-dom";
 import "../styles/resendOTP.css";
 import { getUser } from "../utils/getUser";
 import image from "../styles/image/spinner-white.svg";
+import toast from "react-hot-toast";
 
 export const resendOTPForgotLoader = async () => {
   const user = await getUser();
@@ -20,7 +21,9 @@ export const resendOTPActionForgot = async ({ request }) => {
   };
   try {
     await axios.post(`/api/v1/users/sentOTP`, credentials);
+    toast.success("Email send successfull");
   } catch (error) {
+    toast.error("Email not send");
     return null;
   }
 
