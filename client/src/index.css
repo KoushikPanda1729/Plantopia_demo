@@ -217,9 +217,9 @@ body {
 @media (max-width: 768px) {
     .register-container {
         flex-direction: column;
-        /* Stack social and form sections vertically on small screens */
         align-items: center;
-        /* Center horizontally */
+        margin: 0;
+        padding: 0 1rem;
     }
 
     .social-container {
@@ -233,9 +233,26 @@ body {
         margin-bottom: 20px;
         max-width: none;
         height: auto;
+        box-shadow: none;
+    }
+
+
+
+    .register-form {
+        margin: 0 auto;
+    }
+
+    .register-form::before {
+        content: '----------------- or -----------------';
+        display: block;
+        text-align: center;
+        width: 100%;
+        color: #2e7d32;
+        margin: 20px 0;
+        font-size: 1rem;
     }
 
     .social-container {
-        height: 58vh;
+        height: 30vh;
     }
 }
