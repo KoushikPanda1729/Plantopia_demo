@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, useNavigation } from "react-router-dom";
+import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import "../styles/createProductForm.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,23 +7,35 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import image from "../styles/image/spinner-white.svg";
 
-export const createProductAction = async ({ request }) => {
-  const formData = await request.formData();
-  const categoryId = Object.fromEntries(formData).category;
+export const updateProductLoader = async ({ request }) => {
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
   try {
-    const data = await axios.post(
-      `/api/v1/product/create-product/${categoryId}`,
-      formData
+    const { data } = await axios.get(
+      `/api/v1/product/get-single-product/${id}`
     );
-    toast.success("Product created");
+    return { data };
   } catch (error) {
-    toast.error("Failed");
+    toast.error("Failed to fetch product");
+    return { data: null };
+  }
+};
+
+export const updateProductAction = async ({ request }) => {
+  const formData = await request.formData();
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
+  try {
+    await axios.patch(`/api/v1/product/update-product/${id}`, formData);
+    toast.success("Product updated");
+  } catch (error) {
+    toast.error("Product exists");
   }
 
   return null;
 };
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const [formValues, setFormValues] = useState({
     productName: "",
     title: "",
@@ -35,6 +47,35 @@ const CreateProduct = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageName, setImageName] = useState(null);
   const [allCategory, setAllCategory] = useState([]);
+  const data = useLoaderData()?.data?.data;
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/v1/category/get-all-category");
+        setAllCategory(response.data?.data || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    if (data) {
+      setFormValues({
+        productName: data.productName || "",
+        title: data.title || "",
+        description: data.description || "",
+        price: data.price || "",
+        stock: data.stock || "",
+        category: data.category || "",
+      });
+      setImagePreview(data.productImage?.url || null);
+      setImageName(data.productImage?.name || null);
+    }
+
+    fetchCategories();
+  }, [data]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,44 +90,14 @@ const CreateProduct = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    setFormValues({
-      productName: "",
-      title: "",
-      description: "",
-      price: "",
-      stock: "",
-      category: "",
-    });
-    setImagePreview(null);
-    setImageName(null);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("/api/v1/category/get-all-category");
-        setAllCategory(data?.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const navigation = useNavigation();
-  const loading = navigation.state === "submitting";
-
   return (
     <div className="create-product-form-wrapper">
       <Form
         method="POST"
-        action="/dashboard/create-product"
-        onSubmit={handleSubmit}
+        action={`/dashboard/update-product/${data?._id}`}
         encType="multipart/form-data"
       >
-        <h2 className="create-product-heading">Create Product</h2>
+        <h2 className="create-product-heading">Update Product</h2>
 
         <div className="create-product-form-group">
           <label htmlFor="productName">Product Name</label>
@@ -162,8 +173,8 @@ const CreateProduct = () => {
             </option>
             {allCategory.length !== 0 &&
               allCategory.map((category) => (
-                <option key={category?._id} value={category?._id}>
-                  {category?.name}
+                <option key={category._id} value={category._id}>
+                  {category.name}
                 </option>
               ))}
           </select>
@@ -177,7 +188,6 @@ const CreateProduct = () => {
             id="productImage"
             accept="image/*"
             onChange={handleImageChange}
-            required
           />
         </div>
 
@@ -189,18 +199,17 @@ const CreateProduct = () => {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={isSubmitting}
           className="create-product-submit-btn"
         >
-          {loading ? (
+          {isSubmitting ? (
             <>
-              please wait ...{" "}
+              Please wait...{" "}
               <img className="spinner-green" src={image} alt="spinner" />
             </>
           ) : (
             <>
-              {" "}
-              <FontAwesomeIcon icon={faPlus} /> Add Product
+              <FontAwesomeIcon icon={faPlus} /> Update Product
             </>
           )}
         </button>
@@ -209,4 +218,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default UpdateProduct;

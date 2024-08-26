@@ -6,6 +6,7 @@ import "../styles/viewAllProduct.css";
 
 const Allproducts = () => {
   const [allProduct, setAllProduct] = useState([]);
+
   useEffect(() => {
     const fetchAllProduct = async () => {
       try {
@@ -20,11 +21,32 @@ const Allproducts = () => {
     fetchAllProduct();
   }, []);
 
+  const deleteProduct = async (id, setIsLoading) => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.delete(
+        `/api/v1/product/delete-product/${id}`
+      );
+      setAllProduct((prevProducts) =>
+        prevProducts.filter((product) => product._id !== id)
+      );
+      toast.success("Removed");
+    } catch (error) {
+      toast.error("Failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="product-grid">
       {allProduct.length !== 0 &&
         allProduct.map((product) => (
-          <ViewAllProduct {...product} key={product?._id} />
+          <ViewAllProduct
+            {...product}
+            key={product?._id}
+            deleteProduct={deleteProduct}
+          />
         ))}
     </div>
   );

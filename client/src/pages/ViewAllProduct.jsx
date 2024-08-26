@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit, faStar } from "@fortawesome/free-solid-svg-icons";
 import "../styles/viewAllProduct.css";
+import image from "../styles/image/spinner-white.svg";
+import { NavLink } from "react-router-dom";
 
 const ViewAllProduct = ({
+  _id,
   description,
   price,
   productImage: { url },
@@ -11,7 +14,10 @@ const ViewAllProduct = ({
   rating,
   stock,
   title,
+  deleteProduct,
 }) => {
+  const [loading, setIsLoading] = useState(false);
+  const updatePath = `/dashboard/update-product/${_id}`;
   return (
     <div className="product-card">
       <img src={url} alt={productName} className="product-image" />
@@ -26,11 +32,23 @@ const ViewAllProduct = ({
           <FontAwesomeIcon icon={faStar} className="star-icon" />
         </p>
         <div className="product-buttons">
-          <button className="update-button">
-            <FontAwesomeIcon icon={faEdit} /> Update
-          </button>
-          <button className="remove-button">
-            <FontAwesomeIcon icon={faTrashAlt} /> Remove
+          <NavLink to={updatePath}>
+            <button className="update-button">
+              {" "}
+              <FontAwesomeIcon icon={faEdit} /> Update
+            </button>
+          </NavLink>
+          <button
+            onClick={() => deleteProduct(_id, setIsLoading)}
+            className="remove-button"
+          >
+            {loading ? (
+              <img className="spinner-green" src={image} alt="spinner" />
+            ) : (
+              <>
+                <FontAwesomeIcon icon={faTrashAlt} /> Remove
+              </>
+            )}
           </button>
         </div>
       </div>

@@ -46,6 +46,10 @@ import CreateCategory, { createCategoryAction } from "./pages/CreateCategory";
 import CreateProduct, { createProductAction } from "./pages/CreateProduct";
 import Orders from "./pages/Orders";
 import Allproducts from "./pages/Allproducts";
+import UpdateProduct, {
+  updateProductAction,
+  updateProductLoader,
+} from "./pages/UpdateProduct";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
@@ -77,6 +81,12 @@ const router = createBrowserRouter(
           path="/dashboard/create-product"
           element={<CreateProduct />}
           action={createProductAction}
+        />
+        <Route
+          path="/dashboard/update-product/:id"
+          element={<UpdateProduct />}
+          loader={updateProductLoader}
+          action={updateProductAction}
         />
         <Route path="/dashboard/all-products" element={<Allproducts />} />
         <Route path="/dashboard/order" element={<Orders />} />

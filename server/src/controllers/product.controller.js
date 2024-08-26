@@ -75,8 +75,15 @@ const updateProduct = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, "All fields are required");
   }
+  const existsProduct = await Product.findOne({
+    $and: [{ productName }, { title }, { description }],
+  });
 
+  if (existsProduct) {
+    throw new ApiError(400, "Product is already exists");
+  }
   const productImageLocalPath = req?.file?.path;
+
   if (!productImageLocalPath) {
     throw new ApiError(400, "Product image local path is missing");
   }
@@ -141,4 +148,20 @@ const getAllProduct = asyncHandler(async (_, res) => {
     .json(new ApiResponces(200, allProduct, "All product fetch successfully"));
 });
 
-export { createProduct, updateProduct, deleteProduct, getAllProduct };
+const getSingleProduct = asyncHandler(async (req, res) => {
+  const { productId } = req.params;
+  const singleProduct = await Product.findById(productId);
+  res
+    .status(200)
+    .json(
+      new ApiResponces(200, singleProduct, "Single product fetch successfully")
+    );
+});
+
+export {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getAllProduct,
+  getSingleProduct,
+};

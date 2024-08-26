@@ -83,6 +83,13 @@
     justify-content: space-between;
     margin-top: 10px;
 }
+.product-buttons a{
+    margin-right: 0.4rem;
+    width: 50%;
+}
+.product-buttons button{
+    width: 100%;
+}
 
 .update-button,
 .remove-button {
@@ -96,7 +103,7 @@
 }
 
 .update-button {
-    background-color: #007bff;
+    background-color: green;
     color: white;
     margin-right: 5px;
 }

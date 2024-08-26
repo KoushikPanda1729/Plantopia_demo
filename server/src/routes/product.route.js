@@ -6,6 +6,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProduct,
+  getSingleProduct,
   updateProduct,
 } from "../controllers/product.controller.js";
 
@@ -21,5 +22,6 @@ porductRouter
   .route("/delete-product/:productId")
   .delete(verifyJWT, isAdmin, deleteProduct);
 porductRouter.route("/get-all-product").get(getAllProduct);
+porductRouter.route("/get-single-product/:productId").get(getSingleProduct);
 
 export default porductRouter;
