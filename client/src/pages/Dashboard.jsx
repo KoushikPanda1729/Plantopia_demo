@@ -15,11 +15,14 @@ const Dashboard = () => {
       <div className="dashboard-container">
         <div className="dashboard-sidebar">
           <NavLink to={"/dashboard/create-category"}>
-            <button className="dropdown-btn">Category</button>
+            <button className="dropdown-btn">Create category</button>
           </NavLink>
 
           <NavLink to={"/dashboard/create-product"}>
-            <button className="dropdown-btn">Product</button>
+            <button className="dropdown-btn">Create product</button>
+          </NavLink>
+          <NavLink to={"/dashboard/all-products"}>
+            <button className="dropdown-btn">Products</button>
           </NavLink>
           <NavLink to={"/dashboard/order"}>
             <button className="dropdown-btn">Orders</button>

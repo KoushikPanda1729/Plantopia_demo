@@ -13,8 +13,10 @@ app.use(express.json({ limit: "20kb" }));
 app.use(express.static("public"));
 import userRouter from "./routes/user.route.js";
 import categoryRouter from "./routes/category.route.js";
+import porductRouter from "./routes/product.route.js";
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/category", categoryRouter);
+app.use("/api/v1/product", porductRouter);
 
 export default app;

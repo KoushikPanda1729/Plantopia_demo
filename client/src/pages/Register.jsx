@@ -25,7 +25,7 @@ export const registerLoader = async () => {
 };
 
 export const registerAction = async ({ request }) => {
-  const formData = await request.formData(); // Directly get the FormData
+  const formData = await request.formData(); 
   try {
     await axios.post(`/api/v1/users/register`, formData);
     return redirect("/verify-account");

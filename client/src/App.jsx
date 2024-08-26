@@ -45,6 +45,7 @@ import Dashboard, { dashboardLoader } from "./pages/Dashboard";
 import CreateCategory, { createCategoryAction } from "./pages/CreateCategory";
 import CreateProduct, { createProductAction } from "./pages/CreateProduct";
 import Orders from "./pages/Orders";
+import Allproducts from "./pages/Allproducts";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
@@ -77,6 +78,7 @@ const router = createBrowserRouter(
           element={<CreateProduct />}
           action={createProductAction}
         />
+        <Route path="/dashboard/all-products" element={<Allproducts />} />
         <Route path="/dashboard/order" element={<Orders />} />
       </Route>
       <Route path="/profile" element={<Profile />} loader={profileLoader} />
