@@ -95,7 +95,7 @@ const Login = () => {
           <div className="social">
             {notExists && (
               <span className="redirect-login-register ">
-                User not exists go to{" "}
+                <span style={{ color: "red" }}>User not exists go to</span>{" "}
                 <NavLink to={"/register"}>Sign up </NavLink>
               </span>
             )}

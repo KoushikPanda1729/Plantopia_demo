@@ -155,7 +155,8 @@ const Register = () => {
         </div>
         {alreadyExists && (
           <span className="redirect-login-register">
-            Already signed up? Go to <NavLink to={"/login"}>Sign in</NavLink>
+            <span style={{ color: "red" }}>Already signed up Go to</span>{" "}
+            <NavLink to={"/login"}>Sign in</NavLink>
           </span>
         )}
       </div>
@@ -310,8 +311,7 @@ const Register = () => {
         </div>
         {data?.data === null && (
           <p className="redirect-to-login">
-            User already registered. Go to{" "}
-            <NavLink to={"/login"}>Sign in</NavLink>{" "}
+            User already Sign Up. Go to <NavLink to={"/login"}>Sign in</NavLink>{" "}
           </p>
         )}
       </Form>
