@@ -56,8 +56,8 @@ ul {
 
 
 .nav-item img {
-    height: 35px;
-    width: 35px;
+    height: 20px;
+    width: 20px;
     border-radius: 2rem;
     object-fit: cover;
     margin: 0 auto;
@@ -67,12 +67,30 @@ ul li a {
     text-decoration: none;
     color: #4b0082;
     font-weight: bold;
-    padding: 5px;
     transition: color 0.3s ease;
 }
 
 ul li a:hover {
     color: #ff4500;
+}
+
+.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image img{
+   margin-left: 17%;
+}
+.dashboard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.dashboard svg{
+    margin-left: 35%;
 }
 
 .get-into:active,
