@@ -40,6 +40,7 @@ const Allproducts = () => {
 
   return (
     <div className="product-grid">
+      {allProduct.length === 0 && <h3>No Product Found</h3>}
       {allProduct.length !== 0 &&
         allProduct.map((product) => (
           <ViewAllProduct

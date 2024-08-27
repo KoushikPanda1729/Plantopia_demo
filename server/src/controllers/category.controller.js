@@ -74,21 +74,30 @@ const deleteCategory = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponces(200, {}, "Category deleted successfully"));
 });
-// panda747767@gmail.com
+
 const deleteRelatedCategoryProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  
-  const allProduct = await Product.findOne({ id });
-  console.log(allProduct);
-  res
-    .status(200)
-    .json(
-      new ApiResponces(
-        200,
-        {},
-        "All Category related product deleted successfully"
-      )
-    );
+
+  try {
+    const deleteResult = await Product.deleteMany({ category: id });
+
+    if (deleteResult.deletedCount === 0) {
+      return res.status(200).json(new ApiResponces(200, {}, "Empty category"));
+    }
+
+    res
+      .status(200)
+      .json(
+        new ApiResponces(
+          200,
+          { deletedCount: deleteResult.deletedCount },
+          "All category-related products deleted successfully"
+        )
+      );
+  } catch (error) {
+    console.error("Error deleting products:", error);
+    res.status(500).json(new ApiResponces(500, {}, "Internal server error"));
+  }
 });
 
 const getAllCategory = asyncHandler(async (req, res) => {
