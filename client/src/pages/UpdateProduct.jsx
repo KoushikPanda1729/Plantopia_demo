@@ -23,6 +23,10 @@ export const updateProductLoader = async ({ request }) => {
 
 export const updateProductAction = async ({ request }) => {
   const formData = await request.formData();
+
+  const imageName = formData.get("productImage")?.name;
+  formData.append("imageName", imageName);
+
   const url = new URL(request.url);
   const id = url.pathname.split("/").pop();
   try {

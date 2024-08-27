@@ -65,7 +65,8 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const { productName, title, description, price, stock } = req.body;
+  const { productName, title, description, price, stock, category, imageName } =
+    req.body;
   const { productId } = req.params;
 
   if (
@@ -75,13 +76,57 @@ const updateProduct = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, "All fields are required");
   }
+
   const existsProduct = await Product.findOne({
-    $and: [{ productName }, { title }, { description }],
+    $and: [
+      { productName },
+      { title },
+      { description },
+      { price },
+      { stock },
+      { category },
+    ],
   });
 
   if (existsProduct) {
     throw new ApiError(400, "Product is already exists");
   }
+
+  if (imageName === "") {
+    const product = await Product.findById(productId);
+    if (!product) {
+      throw new ApiError(404, "Product not found");
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        $set: {
+          productName,
+          title,
+          slug: slugify(productName),
+          description,
+          price,
+          stock,
+          category,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponces(
+          200,
+          updatedProduct,
+          "User updated successfully instead of image"
+        )
+      );
+  }
+
   const productImageLocalPath = req?.file?.path;
 
   if (!productImageLocalPath) {
@@ -107,6 +152,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         description,
         price,
         stock,
+        category,
         productImage: {
           public_id: productImageURL.public_id,
           url: productImageURL.url,
@@ -121,7 +167,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     await deleteOnCloudinary(product?.productImage?.public_id);
   }
 
-  res
+  return res
     .status(200)
     .json(new ApiResponces(200, updatedProduct, "User updated successfully"));
 });

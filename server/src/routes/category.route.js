@@ -4,6 +4,7 @@ import isAdmin from "../middlewares/isAdmin.middleware.js";
 import {
   createCategory,
   deleteCategory,
+  deleteRelatedCategoryProduct,
   getAllCategory,
   updateCategory,
 } from "../controllers/category.controller.js";
@@ -22,5 +23,8 @@ categoryRouter
 categoryRouter
   .route("/get-all-category")
   .get(verifyJWT, isAdmin, getAllCategory);
+categoryRouter
+  .route("/delete-all-category-product/:id")
+  .delete(verifyJWT, isAdmin, deleteRelatedCategoryProduct);
 
 export default categoryRouter;

@@ -1,4 +1,5 @@
 import { Category } from "../models/category.model.js";
+import { Product } from "../models/product.model.js";
 import ApiError from "../utils/ApiErrors.util.js";
 import ApiResponces from "../utils/ApiResponces.util.js";
 import asyncHandler from "../utils/asyncHandler.util.js";
@@ -73,6 +74,22 @@ const deleteCategory = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponces(200, {}, "Category deleted successfully"));
 });
+// panda747767@gmail.com
+const deleteRelatedCategoryProduct = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  
+  const allProduct = await Product.findOne({ id });
+  console.log(allProduct);
+  res
+    .status(200)
+    .json(
+      new ApiResponces(
+        200,
+        {},
+        "All Category related product deleted successfully"
+      )
+    );
+});
 
 const getAllCategory = asyncHandler(async (req, res) => {
   const allCategory = await Category.find({});
@@ -81,4 +98,10 @@ const getAllCategory = asyncHandler(async (req, res) => {
     .json(new ApiResponces(200, allCategory, "Get all category successfully"));
 });
 
-export { createCategory, updateCategory, deleteCategory, getAllCategory };
+export {
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  getAllCategory,
+  deleteRelatedCategoryProduct,
+};
