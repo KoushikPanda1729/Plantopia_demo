@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt, faEdit, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingBag,
+  faCartPlus,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import "../styles/viewAllProduct.css";
 import image from "../styles/image/spinner-white.svg";
-import { NavLink } from "react-router-dom";
 
-const ViewAllProduct = ({
+const ViewHomePage = ({
   _id,
   description,
   price,
@@ -14,10 +17,8 @@ const ViewAllProduct = ({
   rating,
   stock,
   title,
-  deleteProduct,
 }) => {
   const [loading, setIsLoading] = useState(false);
-  const updatePath = `/dashboard/update-product/${_id}`;
   const getFirstTenWords = (text) => {
     const words = text.split(" ");
     return words.length > 10 ? `${words.slice(0, 10).join(" ")}...` : text;
@@ -36,21 +37,22 @@ const ViewAllProduct = ({
           <FontAwesomeIcon icon={faStar} className="star-icon" />
         </p>
         <div className="product-buttons">
-          <NavLink to={updatePath}>
-            <button className="update-button">
-              {" "}
-              <FontAwesomeIcon icon={faEdit} /> Update
-            </button>
-          </NavLink>
-          <button
-            onClick={() => deleteProduct(_id, setIsLoading)}
-            className="remove-button"
-          >
+          <button className="update-button">
             {loading ? (
               <img className="spinner-green" src={image} alt="spinner" />
             ) : (
               <>
-                <FontAwesomeIcon icon={faTrashAlt} /> Remove
+                <FontAwesomeIcon icon={faCartPlus} /> Add to cart
+              </>
+            )}
+          </button>
+
+          <button className="remove-button">
+            {loading ? (
+              <img className="spinner-green" src={image} alt="spinner" />
+            ) : (
+              <>
+                <FontAwesomeIcon icon={faShoppingBag} /> Buy
               </>
             )}
           </button>
@@ -60,4 +62,4 @@ const ViewAllProduct = ({
   );
 };
 
-export default ViewAllProduct;
+export default ViewHomePage;

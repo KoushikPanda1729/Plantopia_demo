@@ -6,6 +6,8 @@ import "../styles/profile.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 export const profileLoader = async ({ request }) => {
   const { pathname } = new URL(request.url);
@@ -151,7 +153,10 @@ const Profile = () => {
                 <img className="spinner-green" src={image} alt="spinner" />
               </div>
             ) : (
-              "Update"
+              <>
+                {" "}
+                <FontAwesomeIcon icon={faEdit} /> Update
+              </>
             )}
           </button>
         </div>
@@ -207,7 +212,10 @@ const Profile = () => {
                   <img className="spinner-green" src={image} alt="spinner" />
                 </div>
               ) : (
-                "Update Password"
+                <>
+                  {" "}
+                  <FontAwesomeIcon icon={faEdit} /> Update Password
+                </>
               )}
             </button>
           </Form>

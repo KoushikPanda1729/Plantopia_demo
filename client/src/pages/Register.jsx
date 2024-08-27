@@ -14,6 +14,8 @@ import { getUser } from "../utils/getUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const registerLoader = async () => {
   const user = await getUser();
@@ -25,7 +27,7 @@ export const registerLoader = async () => {
 };
 
 export const registerAction = async ({ request }) => {
-  const formData = await request.formData(); 
+  const formData = await request.formData();
   try {
     await axios.post(`/api/v1/users/register`, formData);
     return redirect("/verify-account");
@@ -308,7 +310,10 @@ const Register = () => {
                 <img className="spinner-green" src={image} alt="spinner" />
               </div>
             ) : (
-              "Sign In"
+              <>
+                Sign Up{" "}
+                <FontAwesomeIcon icon={faSignInAlt} />
+              </>
             )}
           </button>
         </div>

@@ -4,6 +4,7 @@ import ApiError from "../utils/ApiErrors.util.js";
 import ApiResponces from "../utils/ApiResponces.util.js";
 import asyncHandler from "../utils/asyncHandler.util.js";
 import slugify from "slugify";
+import { deleteMultipleImagesOnCloudinary } from "../utils/cloudinary.util.js";
 
 const createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
@@ -79,6 +80,14 @@ const deleteRelatedCategoryProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   try {
+    const productsToDelete = await Product.find({ category: id });
+
+    const productImagePublicId = productsToDelete.map(
+      (product) => product?.productImage?.public_id
+    );
+
+    await deleteMultipleImagesOnCloudinary(productImagePublicId);
+
     const deleteResult = await Product.deleteMany({ category: id });
 
     if (deleteResult.deletedCount === 0) {

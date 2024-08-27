@@ -48,4 +48,19 @@ const deleteOnCloudinary = async (publicId) => {
   }
 };
 
-export { uploadOnCloudinary, deleteOnCloudinary, uploadOnCloudinaryForGoogle };
+const deleteMultipleImagesOnCloudinary = async (publicIds) => {
+  try {
+    const result = await cloudinary.api.delete_resources(publicIds);
+    return result;
+  } catch (error) {
+    console.error("Error deleting images:", error);
+    throw error;
+  }
+};
+
+export {
+  uploadOnCloudinary,
+  deleteOnCloudinary,
+  uploadOnCloudinaryForGoogle,
+  deleteMultipleImagesOnCloudinary,
+};

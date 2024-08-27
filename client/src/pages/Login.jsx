@@ -16,6 +16,8 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import image from "../styles/image/spinner-white.svg";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const loginLoader = async () => {
   const user = await getUser();
@@ -206,7 +208,10 @@ const Login = () => {
                     <img className="spinner-green" src={image} alt="spinner" />
                   </div>
                 ) : (
-                  "Sign In"
+                  <>
+                    {" "}
+                    Sign In <FontAwesomeIcon icon={faSignInAlt} />
+                  </>
                 )}
               </button>
             </div>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import "../styles/nav.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const RootLayout = () => {
   const userData = useRouteLoaderData("parentId");
@@ -50,6 +52,18 @@ const RootLayout = () => {
                 <NavLink to={"/register"}>Get Started</NavLink>
               </li>
             )}
+            {userData && user?.role === "admin" && (
+              <li className="nav-item dashboard">
+                <NavLink to={"/dashboard"}>Dashboard</NavLink>
+              </li>
+            )}
+            {userData && (
+              <Form method="POST" action="/logout" className="logout-form">
+                <button className="logout-button">
+                  Logout <FontAwesomeIcon icon={faSignOutAlt} />
+                </button>
+              </Form>
+            )}
 
             {userData && (
               <li className="nav-item image">
@@ -59,20 +73,17 @@ const RootLayout = () => {
                     src={!user?.img ? userData?.img : user?.img}
                     alt="profile_logo"
                   />{" "}
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      textAlign: "center",
+                      fontFamily: "sans-serif",
+                    }}
+                  >
+                    Profile
+                  </p>
                 </NavLink>
               </li>
-            )}
-
-            {userData && user?.role === "admin" && (
-              <li className="nav-item dashboard">
-                <NavLink to={"/dashboard"}>Dashboard</NavLink>
-              </li>
-            )}
-
-            {userData && (
-              <Form method="POST" action="/logout" className="logout-form">
-                <button className="logout-button">Logout</button>
-              </Form>
             )}
           </ul>
         </nav>
