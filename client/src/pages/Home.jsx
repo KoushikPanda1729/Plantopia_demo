@@ -55,61 +55,62 @@ const Home = () => {
 
   return (
     <>
-      {!isMenuOpen && (
-        <p className="hamburger-menu-button" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
-        </p>
-      )}
-      <div className={`hamburger-menu ${isMenuOpen ? "active" : ""}`}>
-        <span onClick={toggleMenu}>
-          {" "}
-          <FontAwesomeIcon icon={faTimes} />
-        </span>
-        <div className="hamburger-menu-content">
-          <div className="filter-by-category">
-            <h4 style={{ marginBottom: "0.7rem" }}>Filter by category</h4>
-            {allCategory.length !== 0 &&
-              allCategory.map((category) => (
-                <label key={category._id} className="category-label">
-                  <input
-                    type="checkbox"
-                    value={category._id}
-                    onChange={handleCategoryChange}
-                  />
-                  {category.name}
-                </label>
-              ))}
-          </div>
-          <div className="filter-by-price">
-            <h4 style={{ marginBottom: "0.4rem" }}>Filter by price</h4>
-            <input
-              type="range"
-              className="range-input"
-              min="0"
-              max="10000"
-              value={priceRange}
-              onChange={(e) => {
-                setPriceRange(e.target.value);
-              }}
-            />
-            <p>Price Upto:  ₹{priceRange}</p>
-          </div>
-          <input type="submit" value={"Apply"} className="apply" />
-        </div>
-      </div>
       <form
-        className="container"
         onSubmit={(e) => {
           e.preventDefault();
           console.log(categoryValue);
           console.log(priceRange);
         }}
       >
-        <div className="product-home-grid">
-          {allProduct.length !== 0 &&
-            allProduct.map((product) => (
-              <ProductCard {...product} key={product?._id} />
-            ))}
+        {!isMenuOpen && (
+          <p className="hamburger-menu-button" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faBars} />
+          </p>
+        )}
+        <div className={`hamburger-menu ${isMenuOpen ? "active" : ""}`}>
+          <span onClick={toggleMenu}>
+            {" "}
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+          <div className="hamburger-menu-content">
+            <div className="filter-by-category">
+              <h4 style={{ marginBottom: "0.7rem" }}>Filter by category</h4>
+              {allCategory.length !== 0 &&
+                allCategory.map((category) => (
+                  <label key={category._id} className="category-label">
+                    <input
+                      type="checkbox"
+                      value={category._id}
+                      onChange={handleCategoryChange}
+                    />
+                    {category.name}
+                  </label>
+                ))}
+            </div>
+            <div className="filter-by-price">
+              <h4 style={{ marginBottom: "0.4rem" }}>Filter by price</h4>
+              <input
+                type="range"
+                className="range-input"
+                min="0"
+                max="10000"
+                value={priceRange}
+                onChange={(e) => {
+                  setPriceRange(e.target.value);
+                }}
+              />
+              <p>Price Upto: ₹{priceRange}</p>
+            </div>
+            <input type="submit" value={"Apply"} className="apply" />
+          </div>
+        </div>
+        <div className="container">
+          <div className="product-home-grid">
+            {allProduct.length !== 0 &&
+              allProduct.map((product) => (
+                <ProductCard {...product} key={product?._id} />
+              ))}
+          </div>
         </div>
       </form>
     </>
