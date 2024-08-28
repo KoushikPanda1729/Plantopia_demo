@@ -32,8 +32,7 @@ const ViewAllProduct = ({
         <p className="product-price">₹ {price}</p>
         <p className="product-stock">Stock: {stock}</p>
         <p className="product-rating">
-          Rating: {rating}{" "}
-          <FontAwesomeIcon icon={faStar} className="star-icon" />
+         ⭐⭐⭐⭐
         </p>
         <div className="product-buttons">
           <NavLink to={updatePath}>
