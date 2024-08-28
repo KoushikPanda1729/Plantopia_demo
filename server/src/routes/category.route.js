@@ -20,7 +20,7 @@ categoryRouter
 categoryRouter
   .route("/delete-category/:id")
   .delete(verifyJWT, isAdmin, deleteCategory);
-categoryRouter.route("/get-all-category").get(verifyJWT, getAllCategory);
+categoryRouter.route("/get-all-category").get(getAllCategory);
 categoryRouter
   .route("/delete-all-category-product/:id")
   .delete(verifyJWT, isAdmin, deleteRelatedCategoryProduct);
