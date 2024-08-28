@@ -8,6 +8,7 @@ const Home = () => {
   const [allProduct, setAllProduct] = useState([]);
   const [allCategory, setAllCategory] = useState([]);
   const [priceRange, setPriceRange] = useState(50);
+  const [categoryValue, setCategoryValue] = useState([]);
 
   const fetchAllCategory = async () => {
     try {
@@ -17,6 +18,7 @@ const Home = () => {
       console.error("Error fetching categories:", error);
     }
   };
+
   const fetchAllProduct = async () => {
     try {
       const data = await axios.get(`/api/v1/product/get-all-product`);
@@ -33,9 +35,29 @@ const Home = () => {
     fetchAllCategory();
   }, []);
 
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    setCategoryValue((prev) => {
+      if (checked) {
+        return [...prev, value];
+      } else {
+        return prev.filter((category) => {
+          return category !== value;
+        });
+      }
+    });
+  };
+
   return (
     <>
-      <div className="container">
+      <form
+        className="container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(categoryValue);
+          console.log(priceRange);
+        }}
+      >
         <div className="filter">
           <div className="filter-by-category">
             <h4 style={{ marginBottom: "0.7rem" }}>Filter by category</h4>
@@ -45,9 +67,7 @@ const Home = () => {
                   <input
                     type="checkbox"
                     value={category._id}
-                    onClick={(e) => {
-                      console.log(e.target.value);
-                    }}
+                    onChange={handleCategoryChange}
                   />
                   {category.name}
                 </label>
@@ -67,6 +87,7 @@ const Home = () => {
             />
             <p>Value is : {priceRange}</p>
           </div>
+          <input type="submit" value={"Apply"} className="apply" />
         </div>
         <div className="product-home-grid">
           {allProduct.length !== 0 &&
@@ -74,7 +95,7 @@ const Home = () => {
               <ProductCard {...product} key={product?._id} />
             ))}
         </div>
-      </div>
+      </form>
     </>
   );
 };
