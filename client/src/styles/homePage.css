@@ -199,7 +199,7 @@
     padding: 0.5rem;
     position: absolute;
     color: black;
-    z-index: 3;
+    z-index: 1;
     font-weight: bold;
     border-radius: 0.4rem;
     height: 5%;
