@@ -37,8 +37,7 @@ const ProductCard = ({
         <p className="custom-product-price">₹ {price}</p>
         <p className="custom-product-stock">Stock: {stock}</p>
         <p className="custom-product-rating">
-          {rating}{" "}
-          <FontAwesomeIcon icon={faStar} className="custom-star-icon" />
+          ⭐⭐⭐⭐
         </p>
         <div className="custom-product-buttons">
           <button className="custom-update-button">

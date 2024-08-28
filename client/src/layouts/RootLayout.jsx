@@ -34,7 +34,7 @@ const RootLayout = () => {
             </NavLink>
           </h1>
           <div
-            className={`hamburger-menu ${menuOpen ? "open" : ""}`}
+            className={`hamburger-nav-menu ${menuOpen ? "open" : ""}`}
             onClick={toggleMenu}
           >
             <span></span>
