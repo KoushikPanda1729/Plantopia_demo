@@ -198,16 +198,18 @@
     cursor: pointer;
     padding: 0.5rem;
     position: absolute;
-    background-color: green;
-    color: white;
+    color: black;
     z-index: 3;
     font-weight: bold;
     border-radius: 0.4rem;
     height: 5%;
+    transition: 0.2s;
 }
 
 .hamburger-menu-button:hover{
-background-color: rgb(24, 156, 24);
+background-color: tomato;
+color: white;
+transition: 0.2s;
 }
 
 .hamburger-menu-content {
