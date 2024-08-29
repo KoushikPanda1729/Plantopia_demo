@@ -60,13 +60,15 @@ const deleteCategory = asyncHandler(async (req, res) => {
   try {
     const productsToDelete = await Product.find({ category: id });
 
-    const productImagePublicId = productsToDelete.map(
-      (product) => product?.productImage?.public_id
-    );
+    if (productsToDelete.length !== 0) {
+      const productImagePublicId = productsToDelete.map(
+        (product) => product?.productImage?.public_id
+      );
 
-    await deleteMultipleImagesOnCloudinary(productImagePublicId);
+      await deleteMultipleImagesOnCloudinary(productImagePublicId);
 
-    await Product.deleteMany({ category: id });
+      await Product.deleteMany({ category: id });
+    }
 
     const deleteCategory = await Category.findByIdAndDelete(
       id,
