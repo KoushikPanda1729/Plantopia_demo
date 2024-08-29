@@ -75,12 +75,10 @@ const CreateCategory = () => {
       const { data } = await axios.delete(
         `/api/v1/category/delete-category/${id}`
       );
-      const { detetedProduct } = await axios.delete(
-        `/api/v1/category/delete-all-category-product/${id}`
-      );
       setAllCategory((prevCategories) =>
         prevCategories.filter((category) => category._id !== id)
       );
+
       toast.success("Removed");
     } catch (error) {
       console.error("Error deleting category:", error);

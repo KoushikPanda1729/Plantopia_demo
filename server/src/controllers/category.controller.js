@@ -57,28 +57,6 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const deleteCategory = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const deleteCategory = await Category.findByIdAndDelete(
-    id,
-    {
-      $unset: { name: null },
-    },
-    {
-      new: true,
-    }
-  );
-
-  if (!deleteCategory) {
-    throw new ApiError(400, "Category does not exists");
-  }
-
-  res
-    .status(200)
-    .json(new ApiResponces(200, {}, "Category deleted successfully"));
-});
-
-const deleteRelatedCategoryProduct = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-
   try {
     const productsToDelete = await Product.find({ category: id });
 
@@ -93,19 +71,25 @@ const deleteRelatedCategoryProduct = asyncHandler(async (req, res) => {
     if (deleteResult.deletedCount === 0) {
       return res.status(200).json(new ApiResponces(200, {}, "Empty category"));
     }
+    const deleteCategory = await Category.findByIdAndDelete(
+      id,
+      {
+        $unset: { name: null },
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (!deleteCategory) {
+      throw new ApiError(400, "Category does not exists");
+    }
 
     res
       .status(200)
-      .json(
-        new ApiResponces(
-          200,
-          { deletedCount: deleteResult.deletedCount },
-          "All category-related products deleted successfully"
-        )
-      );
+      .json(new ApiResponces(200, {}, "Category deleted successfully"));
   } catch (error) {
-    console.error("Error deleting products:", error);
-    res.status(500).json(new ApiResponces(500, {}, "Internal server error"));
+    res.status(200).json(new ApiError(200, "Category deletion error"));
   }
 });
 
@@ -116,10 +100,4 @@ const getAllCategory = asyncHandler(async (req, res) => {
     .json(new ApiResponces(200, allCategory, "Get all category successfully"));
 });
 
-export {
-  createCategory,
-  updateCategory,
-  deleteCategory,
-  getAllCategory,
-  deleteRelatedCategoryProduct,
-};
+export { createCategory, updateCategory, deleteCategory, getAllCategory };
