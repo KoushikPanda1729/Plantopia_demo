@@ -238,6 +238,8 @@
 /* Responsive Styles */
 
 @media (max-width: 786px) {
+
+
     .filter {
         display: none;
     }
@@ -248,8 +250,9 @@
     }
 
     .product-home-grid {
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        max-width: 1200px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
     .custom-product-card {
