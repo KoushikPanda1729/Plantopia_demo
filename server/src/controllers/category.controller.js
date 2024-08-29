@@ -68,9 +68,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
 
     const deleteResult = await Product.deleteMany({ category: id });
 
-    if (deleteResult.deletedCount === 0) {
-      return res.status(200).json(new ApiResponces(200, {}, "Empty category"));
-    }
+
     const deleteCategory = await Category.findByIdAndDelete(
       id,
       {
