@@ -4,6 +4,10 @@
     display: flex;
 }
 
+.single-card-view a {
+    text-decoration: none;
+}
+
 .filter {
     width: 20vw;
     height: 45vh;
@@ -104,16 +108,27 @@
     gap: 5px;
 }
 
+/* Flipkart-style button colors */
 .custom-update-button {
     width: 55%;
-    background-color: #28a745;
+    background-color: #ff9f00;
+    /* Flipkart orange */
     color: #fff;
 }
 
+.custom-update-button:hover {
+    background-color: #fb8c00;
+}
+
 .custom-remove-button {
-    background-color: #dc3545;
+    background-color: #fb641b;
+    /* Flipkart red */
     color: #fff;
     width: 40%;
+}
+
+.custom-remove-button:hover {
+    background-color: #e65100;
 }
 
 .spinner-green {
@@ -137,7 +152,8 @@
     border: none;
     padding: 0.4rem 0;
     border-radius: 0.4rem;
-    background-color: tomato;
+    background-color: #ff9f00;
+    /* Flipkart orange */
     color: white;
     font-size: 1rem;
     font-weight: bold;
@@ -145,7 +161,7 @@
 }
 
 .apply:hover {
-    background-color: rgb(251, 108, 83);
+    background-color: #fb8c00;
 }
 
 /* Hamburger Menu Styles */
@@ -172,11 +188,11 @@
     z-index: 1;
 }
 
-
 .hamburger-menu.active span {
     border-radius: 0.4rem;
     font-size: 1.4rem;
-    background-color: tomato;
+    background-color: #ff9f00;
+    /* Flipkart orange */
     padding: 0.5rem;
     display: inline-block;
     width: 20%;
@@ -186,10 +202,9 @@
     cursor: pointer;
 }
 
-.hamburger-menu.active span:hover{
-    background-color: rgb(240, 78, 50);
+.hamburger-menu.active span:hover {
+    background-color: #fb8c00;
 }
-
 
 .hamburger-menu-button {
     position: absolute;
@@ -207,10 +222,11 @@
     transition: 0.2s;
 }
 
-.hamburger-menu-button:hover{
-background-color: tomato;
-color: white;
-transition: 0.2s;
+.hamburger-menu-button:hover {
+    background-color: #fb641b;
+    /* Flipkart red */
+    color: white;
+    transition: 0.2s;
 }
 
 .hamburger-menu-content {
@@ -218,8 +234,6 @@ transition: 0.2s;
     flex-direction: column;
     gap: 1rem;
 }
-
-
 
 /* Responsive Styles */
 
@@ -256,10 +270,7 @@ transition: 0.2s;
         padding: 0;
     }
 
-
     .filter-by-price {
         width: 150px;
     }
-
-
 }

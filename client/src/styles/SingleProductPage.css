@@ -1,0 +1,134 @@
+/* Flipkart-style SingleProductPage.css */
+
+.flipkart-product-container {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    background-color: #f1f3f6;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.flipkart-product-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.flipkart-product-image {
+    width: 350px;
+    height: 350px;
+    object-fit: contain;
+}
+
+.flipkart-product-details {
+    flex: 2;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flipkart-product-name {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.flipkart-product-title {
+    font-size: 1.2rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.flipkart-product-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.flipkart-product-price {
+    font-size: 1.8rem;
+    color: #e91e63;
+    margin-bottom: 15px;
+}
+
+.flipkart-product-stock {
+    font-size: 1.2rem;
+    color: #4caf50;
+    margin-bottom: 30px;
+}
+
+.flipkart-product-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.flipkart-add-to-cart-button,
+.flipkart-buy-button {
+    padding: 14px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.flipkart-add-to-cart-button {
+    background-color: #ff9f00;
+    /* Flipkart-style orange */
+}
+
+.flipkart-add-to-cart-button:hover {
+    background-color: #fb8c00;
+}
+
+.flipkart-buy-button {
+    background-color: #fb641b;
+    /* Flipkart-style red */
+}
+
+.flipkart-buy-button:hover {
+    background-color: #e65100;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .flipkart-product-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .flipkart-product-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .flipkart-product-details {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .flipkart-product-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .flipkart-add-to-cart-button,
+    .flipkart-buy-button {
+        width: 100%;
+    }
+}

@@ -51,11 +51,19 @@ import UpdateProduct, {
   updateProductLoader,
 } from "./pages/UpdateProduct";
 import { fetchAllProductLoader } from "./pages/Home";
+import SingleProductPage, {
+  singleProductPageLoader,
+} from "./pages/SingleProductPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
     <Route path="/" element={<RootLayout />} loader={getUser} id="parentId">
       <Route index element={<Home />} loader={fetchAllProductLoader} />
+      <Route
+        path="/:id"
+        element={<SingleProductPage />}
+        loader={singleProductPageLoader}
+      />
       <Route
         path="/register"
         element={<Register />}
@@ -89,7 +97,12 @@ const router = createBrowserRouter(
           loader={updateProductLoader}
           action={updateProductAction}
         />
-        <Route path="/dashboard/all-products" element={<Allproducts />} />
+        <Route path="/dashboard/all-products" element={<Allproducts />} loader={fetchAllProductLoader} />
+        <Route
+          path="/dashboard/all-products/:id"
+          element={<SingleProductPage />}
+          loader={singleProductPageLoader}
+        />
         <Route path="/dashboard/order" element={<Orders />} />
       </Route>
       <Route path="/profile" element={<Profile />} loader={profileLoader} />

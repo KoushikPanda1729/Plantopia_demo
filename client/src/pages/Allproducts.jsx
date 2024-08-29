@@ -3,23 +3,11 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ViewAllProduct from "./ViewAllProduct";
 import "../styles/viewAllProduct.css";
+import { useLoaderData } from "react-router-dom";
 
 const Allproducts = () => {
-  const [allProduct, setAllProduct] = useState([]);
-
-  useEffect(() => {
-    const fetchAllProduct = async () => {
-      try {
-        const data = await axios.get(`/api/v1/product/get-all-product`);
-        setAllProduct(data?.data?.data);
-        return data;
-      } catch (error) {
-        toast.error("Failed to fetch");
-        return null;
-      }
-    };
-    fetchAllProduct();
-  }, []);
+  const data = useLoaderData();
+  const [allProduct, setAllProduct] = useState(data?.data || []);
 
   const deleteProduct = async (id, setIsLoading) => {
     try {
