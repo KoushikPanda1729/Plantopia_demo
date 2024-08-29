@@ -66,8 +66,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
 
     await deleteMultipleImagesOnCloudinary(productImagePublicId);
 
-    const deleteResult = await Product.deleteMany({ category: id });
-
+    await Product.deleteMany({ category: id });
 
     const deleteCategory = await Category.findByIdAndDelete(
       id,
