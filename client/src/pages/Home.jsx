@@ -5,9 +5,21 @@ import ProductCard from "./ProductCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../styles/homePage.css";
+import { useLoaderData } from "react-router-dom";
+
+export const fetchAllProductLoader = async () => {
+  try {
+    const data = await axios.get(`/api/v1/product/get-all-product`);
+    return { data: data?.data?.data };
+  } catch (error) {
+    toast.error("Failed to fetch");
+    return null;
+  }
+};
 
 const Home = () => {
-  const [allProduct, setAllProduct] = useState([]);
+  const data = useLoaderData();
+  const allProduct = data?.data || [];
   const [allCategory, setAllCategory] = useState([]);
   const [priceRange, setPriceRange] = useState(50);
   const [categoryValue, setCategoryValue] = useState([]);
@@ -22,19 +34,7 @@ const Home = () => {
     }
   };
 
-  const fetchAllProduct = async () => {
-    try {
-      const data = await axios.get(`/api/v1/product/get-all-product`);
-      setAllProduct(data?.data?.data);
-      return data;
-    } catch (error) {
-      toast.error("Failed to fetch");
-      return null;
-    }
-  };
-
   useEffect(() => {
-    fetchAllProduct();
     fetchAllCategory();
   }, []);
 

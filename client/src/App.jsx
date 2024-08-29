@@ -50,11 +50,12 @@ import UpdateProduct, {
   updateProductAction,
   updateProductLoader,
 } from "./pages/UpdateProduct";
+import { fetchAllProductLoader } from "./pages/Home";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route path="/" element={<RootLayout />} loader={rootLoader}>
     <Route path="/" element={<RootLayout />} loader={getUser} id="parentId">
-      <Route index element={<Home />} />
+      <Route index element={<Home />} loader={fetchAllProductLoader} />
       <Route
         path="/register"
         element={<Register />}
