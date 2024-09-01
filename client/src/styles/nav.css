@@ -74,22 +74,24 @@ ul li a:hover {
     color: #ff4500;
 }
 
-.image{
+.image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.image img{
-   margin-left: 17%;
+.image img {
+    margin-left: 17%;
 }
-.dashboard{
+
+.dashboard {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-.dashboard svg{
+
+.dashboard svg {
     margin-left: 35%;
 }
 
@@ -103,6 +105,24 @@ ul li a:hover {
     transition: 1s;
 }
 
+.cart {
+    font-size: 1.5rem;
+    position: relative;
+}
+.item-count{
+    position: absolute;
+    color: white;
+    background-color: red;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    padding: 0.1rem;
+    top: -0.9rem;
+    left: 1.4rem;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+}
 
 button {
     padding: 5px 10px;
@@ -190,6 +210,10 @@ button:hover {
     button {
         margin-top: 10px;
     }
+    .cart{
+        margin-top: 1rem;
+    }
+    
 }
 
 @media (max-width: 480px) {

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Form, NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import "../styles/nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSignOutAlt,
+  faThLarge,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
 
 const RootLayout = () => {
   const userData = useRouteLoaderData("parentId");
@@ -52,6 +56,11 @@ const RootLayout = () => {
                 <NavLink to={"/register"}>Get Started</NavLink>
               </li>
             )}
+
+            <li className="nav-item cart">
+              <div className="item-count">7</div>
+              <FontAwesomeIcon icon={faShoppingCart} />
+            </li>
 
             {userData && (
               <li className="nav-item image">
