@@ -3,9 +3,15 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "./ProductCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faTimes,
+  faFilter,
+  faUndo,
+} from "@fortawesome/free-solid-svg-icons";
 import "../styles/homePage.css";
 import { useLoaderData } from "react-router-dom";
+import image from "../styles/image/spinner-white.svg";
 
 export const fetchAllProductLoader = async () => {
   try {
@@ -26,6 +32,7 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductFound, setIsProductFound] = useState(false);
   const [countProduct, setCountProduct] = useState(null);
+  const [loading, setIsLoading] = useState(false);
 
   const fetchAllCategory = async () => {
     try {
@@ -56,10 +63,9 @@ const Home = () => {
   };
 
   const handleReset = () => {
-    // Resetting the filter and state variables
     setPriceRange(0);
     setCategoryValue([]);
-    setAllProduct(data?.data || []); // Reset to initial products
+    setAllProduct(data?.data || []);
     setIsProductFound(false);
     setCountProduct(null);
     setIsMenuOpen(false);
@@ -77,6 +83,7 @@ const Home = () => {
           };
 
           try {
+            setIsLoading(true);
             const response = await axios.post(
               "/api/v1/product/filter-product",
               credencials
@@ -89,6 +96,8 @@ const Home = () => {
             setIsProductFound(true);
             setCountProduct(null);
             toast.error("Product not found");
+          } finally {
+            setIsLoading(false);
           }
         }}
       >
@@ -132,15 +141,27 @@ const Home = () => {
               />
               <p>Price Upto: ₹{priceRange}</p>
             </div>
-            <input type="submit" value={"Apply"} className="apply" />
+
+            <button type="submit" className="apply" disabled={loading}>
+              {loading ? (
+                <>
+                  please wait ...{" "}
+                  <img className="spinner-green" src={image} alt="spinner" />
+                </>
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faFilter} /> Apply
+                </>
+              )}
+            </button>
           </div>
-          <input
+          <button
             onClick={handleReset}
-            type="button"
-            value={"Reset"}
             className="apply"
             style={{ margin: "1rem 0" }}
-          />
+          >
+            <FontAwesomeIcon icon={faUndo} /> Reset
+          </button>
           {isProductFound && <p style={{ color: "red" }}>Product not found</p>}
           {countProduct === 0
             ? "Select filter"
