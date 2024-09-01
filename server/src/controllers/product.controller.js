@@ -207,8 +207,6 @@ const getSingleProduct = asyncHandler(async (req, res) => {
 const filterProduct = asyncHandler(async (req, res) => {
   try {
     let { categoryValue, priceRange } = req.body;
-    // console.log(categoryValue);
-    // console.log(priceRange);
 
     let arg = {};
     if (categoryValue?.length > 0) {
@@ -218,11 +216,9 @@ const filterProduct = asyncHandler(async (req, res) => {
       arg.price = { $gte: priceRange[0], $lte: priceRange[1] };
     }
 
-    console.log();
-
     const filterProduct = await Product.find(arg);
     let productCount = 0;
-    if (arg?.category) {
+    if (arg?.category || arg?.price) {
       productCount = await Product.countDocuments(arg);
     }
 
