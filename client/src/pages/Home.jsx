@@ -55,6 +55,16 @@ const Home = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const handleReset = () => {
+    // Resetting the filter and state variables
+    setPriceRange(0);
+    setCategoryValue([]);
+    setAllProduct(data?.data || []); // Reset to initial products
+    setIsProductFound(false);
+    setCountProduct(null);
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <form
@@ -67,13 +77,13 @@ const Home = () => {
           };
 
           try {
-            const data = await axios.post(
+            const response = await axios.post(
               "/api/v1/product/filter-product",
               credencials
             );
 
-            setAllProduct(data?.data?.data?.filterProduct);
-            setCountProduct(data?.data?.data?.productCount);
+            setAllProduct(response?.data?.data?.filterProduct);
+            setCountProduct(response?.data?.data?.productCount);
             setIsProductFound(false);
           } catch (error) {
             setIsProductFound(true);
@@ -101,6 +111,7 @@ const Home = () => {
                     <input
                       type="checkbox"
                       value={category._id}
+                      checked={categoryValue.includes(category._id)}
                       onChange={handleCategoryChange}
                     />
                     {category.name}
@@ -124,14 +135,8 @@ const Home = () => {
             <input type="submit" value={"Apply"} className="apply" />
           </div>
           <input
-            onClick={() => {
-              setPriceRange(0);
-              setIsProductFound(false);
-              setCountProduct(null);
-              setIsMenuOpen(false);
-              window.location.reload();
-            }}
-            type="submit"
+            onClick={handleReset}
+            type="button"
             value={"Reset"}
             className="apply"
             style={{ margin: "1rem 0" }}
