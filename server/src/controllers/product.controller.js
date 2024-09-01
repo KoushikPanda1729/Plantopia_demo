@@ -204,10 +204,43 @@ const getSingleProduct = asyncHandler(async (req, res) => {
     );
 });
 
+const filterProduct = asyncHandler(async (req, res) => {
+  try {
+    let { categoryValue, priceRange } = req.body;
+    // console.log(categoryValue);
+    // console.log(priceRange);
+
+    let arg = {};
+    if (categoryValue?.length > 0) {
+      arg.category = categoryValue;
+    }
+    if (priceRange[1] > 0) {
+      arg.price = { $gte: priceRange[0], $lte: priceRange[1] };
+    }
+
+    console.log(arg);
+
+    const filterProduct = await Product.find(arg);
+    if (filterProduct.length === 0) {
+      throw new ApiError(400, "Product not found");
+    }
+
+    return res
+      .status(200)
+      .json(
+        new ApiResponces(200, filterProduct, "Product filtered successfully")
+      );
+  } catch (error) {
+    console.log(error.message);
+    return res.status(400).json(new ApiError(400, "Product not filtered "));
+  }
+});
+
 export {
   createProduct,
   updateProduct,
   deleteProduct,
   getAllProduct,
   getSingleProduct,
+  filterProduct,
 };

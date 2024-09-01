@@ -19,11 +19,12 @@ export const fetchAllProductLoader = async () => {
 
 const Home = () => {
   const data = useLoaderData();
-  const allProduct = data?.data || [];
+  const [allProduct, setAllProduct] = useState(data?.data || []);
   const [allCategory, setAllCategory] = useState([]);
-  const [priceRange, setPriceRange] = useState(50);
+  const [priceRange, setPriceRange] = useState(0);
   const [categoryValue, setCategoryValue] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductFound, setIsProductFound] = useState(false);
 
   const fetchAllCategory = async () => {
     try {
@@ -56,10 +57,25 @@ const Home = () => {
   return (
     <>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          console.log(categoryValue);
-          console.log(priceRange);
+          const price = [0, +priceRange];
+          const credencials = {
+            categoryValue,
+            priceRange: price,
+          };
+
+          try {
+            const data = await axios.post(
+              "/api/v1/product/filter-product",
+              credencials
+            );
+            setAllProduct(data?.data?.data);
+            setIsProductFound(false);
+          } catch (error) {
+            setIsProductFound(true);
+            toast.error("Product not found");
+          }
         }}
       >
         {!isMenuOpen && (
@@ -103,8 +119,26 @@ const Home = () => {
             </div>
             <input type="submit" value={"Apply"} className="apply" />
           </div>
+          <input
+            onClick={() => {
+              setPriceRange(0);
+              setCategoryValue([]);
+              setIsProductFound(false);
+              setIsMenuOpen(false);
+            }}
+            type="submit"
+            value={"Reset"}
+            className="apply"
+            style={{ margin: "1rem 0" }}
+          />
+          {isProductFound && <p style={{ color: "red" }}>Product not found</p>}
         </div>
-        <div className="container">
+        <div
+          className="container"
+          onClick={() => {
+            setIsMenuOpen(false);
+          }}
+        >
           <div className="product-home-grid">
             {allProduct.length !== 0 &&
               allProduct.map((product) => (

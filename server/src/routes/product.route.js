@@ -5,6 +5,7 @@ import upload from "../middlewares/multer.middleware.js";
 import {
   createProduct,
   deleteProduct,
+  filterProduct,
   getAllProduct,
   getSingleProduct,
   updateProduct,
@@ -23,5 +24,6 @@ porductRouter
   .delete(verifyJWT, isAdmin, deleteProduct);
 porductRouter.route("/get-all-product").get(getAllProduct);
 porductRouter.route("/get-single-product/:productId").get(getSingleProduct);
+porductRouter.route("/filter-product").post(filterProduct);
 
 export default porductRouter;
