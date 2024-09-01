@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "./ProductCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../styles/homePage.css";
 import { useLoaderData } from "react-router-dom";
 
@@ -94,7 +94,7 @@ const Home = () => {
       >
         {!isMenuOpen && (
           <p className="hamburger-menu-button" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon icon={faEllipsisV} />
           </p>
         )}
         <div className={`hamburger-menu ${isMenuOpen ? "active" : ""}`}>
