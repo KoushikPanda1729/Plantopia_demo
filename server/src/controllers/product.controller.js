@@ -218,9 +218,14 @@ const filterProduct = asyncHandler(async (req, res) => {
       arg.price = { $gte: priceRange[0], $lte: priceRange[1] };
     }
 
-    console.log(arg);
+    console.log();
 
     const filterProduct = await Product.find(arg);
+    let productCount = 0;
+    if (arg?.category) {
+      productCount = await Product.countDocuments(arg);
+    }
+
     if (filterProduct.length === 0) {
       throw new ApiError(400, "Product not found");
     }
@@ -228,7 +233,11 @@ const filterProduct = asyncHandler(async (req, res) => {
     return res
       .status(200)
       .json(
-        new ApiResponces(200, filterProduct, "Product filtered successfully")
+        new ApiResponces(
+          200,
+          { filterProduct, productCount },
+          "Product filtered successfully"
+        )
       );
   } catch (error) {
     console.log(error.message);

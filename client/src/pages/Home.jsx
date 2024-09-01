@@ -25,6 +25,7 @@ const Home = () => {
   const [categoryValue, setCategoryValue] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductFound, setIsProductFound] = useState(false);
+  const [countProduct, setCountProduct] = useState(null);
 
   const fetchAllCategory = async () => {
     try {
@@ -70,10 +71,13 @@ const Home = () => {
               "/api/v1/product/filter-product",
               credencials
             );
-            setAllProduct(data?.data?.data);
+
+            setAllProduct(data?.data?.data?.filterProduct);
+            setCountProduct(data?.data?.data?.productCount);
             setIsProductFound(false);
           } catch (error) {
             setIsProductFound(true);
+            setCountProduct(null);
             toast.error("Product not found");
           }
         }}
@@ -122,9 +126,10 @@ const Home = () => {
           <input
             onClick={() => {
               setPriceRange(0);
-              setCategoryValue([]);
               setIsProductFound(false);
+              setCountProduct(null);
               setIsMenuOpen(false);
+              window.location.reload();
             }}
             type="submit"
             value={"Reset"}
@@ -132,6 +137,13 @@ const Home = () => {
             style={{ margin: "1rem 0" }}
           />
           {isProductFound && <p style={{ color: "red" }}>Product not found</p>}
+          {countProduct === 0
+            ? "Select filter"
+            : countProduct !== 0 && (
+                <p style={{ color: "green" }}>
+                  {countProduct > 0 ? `${countProduct} Search item` : ""}{" "}
+                </p>
+              )}
         </div>
         <div
           className="container"
