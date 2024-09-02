@@ -8,7 +8,7 @@ import {
 } from "../controllers/cart.controller.js";
 
 const cartRouter = Router();
-cartRouter.route("/add-to-cart").post(verifyJWT, addToCart);
+cartRouter.route("/add-to-cart/:id").post(verifyJWT, addToCart);
 cartRouter.route("/delete-form-cart").delete(verifyJWT, deleteFromCart);
 cartRouter.route("/increase").post(verifyJWT, increaseQYT);
 cartRouter.route("/decrease").post(verifyJWT, decreaseQYT);
