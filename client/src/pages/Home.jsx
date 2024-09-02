@@ -12,6 +12,7 @@ import {
 import "../styles/homePage.css";
 import { useLoaderData } from "react-router-dom";
 import image from "../styles/image/spinner-white.svg";
+import CartProvider from "./CartProvider";
 
 export const fetchAllProductLoader = async () => {
   try {
@@ -73,118 +74,122 @@ const Home = () => {
 
   return (
     <>
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const price = [0, +priceRange];
-          const credencials = {
-            categoryValue,
-            priceRange: price,
-          };
+      <CartProvider>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const price = [0, +priceRange];
+            const credencials = {
+              categoryValue,
+              priceRange: price,
+            };
 
-          try {
-            setIsLoading(true);
-            const response = await axios.post(
-              "/api/v1/product/filter-product",
-              credencials
-            );
+            try {
+              setIsLoading(true);
+              const response = await axios.post(
+                "/api/v1/product/filter-product",
+                credencials
+              );
 
-            setAllProduct(response?.data?.data?.filterProduct);
-            setCountProduct(response?.data?.data?.productCount);
-            setIsProductFound(false);
-          } catch (error) {
-            setIsProductFound(true);
-            setCountProduct(null);
-            toast.error("Product not found");
-          } finally {
-            setIsLoading(false);
-          }
-        }}
-      >
-        {!isMenuOpen && (
-          <p className="hamburger-menu-button" onClick={toggleMenu}>
-            <FontAwesomeIcon icon={faEllipsisV} />
-          </p>
-        )}
-        <div className={`hamburger-menu ${isMenuOpen ? "active" : ""}`}>
-          <span onClick={toggleMenu}>
-            {" "}
-            <FontAwesomeIcon icon={faTimes} />
-          </span>
-          <div className="hamburger-menu-content">
-            <div className="filter-by-category">
-              <h4 style={{ marginBottom: "0.7rem" }}>Filter by category</h4>
-              {allCategory.length !== 0 &&
-                allCategory.map((category) => (
-                  <label key={category._id} className="category-label">
-                    <input
-                      type="checkbox"
-                      value={category._id}
-                      checked={categoryValue.includes(category._id)}
-                      onChange={handleCategoryChange}
-                    />
-                    {category.name}
-                  </label>
-                ))}
-            </div>
-            <div className="filter-by-price">
-              <h4 style={{ marginBottom: "0.4rem" }}>Filter by price</h4>
-              <input
-                type="range"
-                className="range-input"
-                min="0"
-                max="10000"
-                value={priceRange}
-                onChange={(e) => {
-                  setPriceRange(e.target.value);
-                }}
-              />
-              <p>Price Upto: ₹{priceRange}</p>
-            </div>
-
-            <button type="submit" className="apply" disabled={loading}>
-              {loading ? (
-                <>
-                  please wait ...{" "}
-                  <img className="spinner-green" src={image} alt="spinner" />
-                </>
-              ) : (
-                <>
-                  <FontAwesomeIcon icon={faFilter} /> Apply
-                </>
-              )}
-            </button>
-          </div>
-          <button
-            onClick={handleReset}
-            className="apply"
-            style={{ margin: "1rem 0" }}
-          >
-            <FontAwesomeIcon icon={faUndo} /> Reset
-          </button>
-          {isProductFound && <p style={{ color: "red" }}>Product not found</p>}
-          {countProduct === 0
-            ? "Select filter"
-            : countProduct !== 0 && (
-                <p style={{ color: "green" }}>
-                  {countProduct > 0 ? `${countProduct} Search item` : ""}{" "}
-                </p>
-              )}
-        </div>
-        <div
-          className="container"
-          onClick={() => {
-            setIsMenuOpen(false);
+              setAllProduct(response?.data?.data?.filterProduct);
+              setCountProduct(response?.data?.data?.productCount);
+              setIsProductFound(false);
+            } catch (error) {
+              setIsProductFound(true);
+              setCountProduct(null);
+              toast.error("Product not found");
+            } finally {
+              setIsLoading(false);
+            }
           }}
         >
-          <div className="product-home-grid">
-            {allProduct.length !== 0 &&
-              allProduct.map((product) => (
-                <ProductCard {...product} key={product?._id} />
-              ))}
+          {!isMenuOpen && (
+            <p className="hamburger-menu-button" onClick={toggleMenu}>
+              <FontAwesomeIcon icon={faEllipsisV} />
+            </p>
+          )}
+          <div className={`hamburger-menu ${isMenuOpen ? "active" : ""}`}>
+            <span onClick={toggleMenu}>
+              {" "}
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+            <div className="hamburger-menu-content">
+              <div className="filter-by-category">
+                <h4 style={{ marginBottom: "0.7rem" }}>Filter by category</h4>
+                {allCategory.length !== 0 &&
+                  allCategory.map((category) => (
+                    <label key={category._id} className="category-label">
+                      <input
+                        type="checkbox"
+                        value={category._id}
+                        checked={categoryValue.includes(category._id)}
+                        onChange={handleCategoryChange}
+                      />
+                      {category.name}
+                    </label>
+                  ))}
+              </div>
+              <div className="filter-by-price">
+                <h4 style={{ marginBottom: "0.4rem" }}>Filter by price</h4>
+                <input
+                  type="range"
+                  className="range-input"
+                  min="0"
+                  max="10000"
+                  value={priceRange}
+                  onChange={(e) => {
+                    setPriceRange(e.target.value);
+                  }}
+                />
+                <p>Price Upto: ₹{priceRange}</p>
+              </div>
+
+              <button type="submit" className="apply" disabled={loading}>
+                {loading ? (
+                  <>
+                    please wait ...{" "}
+                    <img className="spinner-green" src={image} alt="spinner" />
+                  </>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon={faFilter} /> Apply
+                  </>
+                )}
+              </button>
+            </div>
+            <button
+              onClick={handleReset}
+              className="apply"
+              style={{ margin: "1rem 0" }}
+            >
+              <FontAwesomeIcon icon={faUndo} /> Reset
+            </button>
+            {isProductFound && (
+              <p style={{ color: "red" }}>Product not found</p>
+            )}
+            {countProduct === 0
+              ? "Select filter"
+              : countProduct !== 0 && (
+                  <p style={{ color: "green" }}>
+                    {countProduct > 0 ? `${countProduct} Search item` : ""}{" "}
+                  </p>
+                )}
           </div>
-        </div>
-      </form>
+          <div
+            className="container"
+            onClick={() => {
+              setIsMenuOpen(false);
+            }}
+          >
+            <div className="product-home-grid">
+              {allProduct.length !== 0 &&
+                allProduct.map((product) => (
+                  <ProductCard {...product} key={product?._id} />
+                ))}
+            </div>
+          </div>
+        </form>
+      </CartProvider>
     </>
   );
 };

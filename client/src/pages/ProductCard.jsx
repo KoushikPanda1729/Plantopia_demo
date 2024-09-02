@@ -8,6 +8,7 @@ import {
 import image from "../styles/image/spinner-white.svg";
 import "../styles/homePage.css";
 import { NavLink } from "react-router-dom";
+import { useCart } from "./CartProvider";
 
 const ProductCard = ({
   _id,
@@ -20,6 +21,26 @@ const ProductCard = ({
   title,
 }) => {
   const [loading, setIsLoading] = useState(false);
+  const { addToCart, cart } = useCart();
+
+  const handleAddCart = async () => {
+    const itemExists = cart.some((cartItem) => cartItem._id === _id);
+
+    if (!itemExists) {
+      const cartItem = {
+        _id,
+        description,
+        price,
+        productImage: { url },
+        productName,
+        rating,
+        stock,
+        title,
+        quantity: 1,
+      };
+      addToCart(cartItem);
+    }
+  };
 
   const productDetailsHomePath = `/${_id}`;
   return (
@@ -40,7 +61,7 @@ const ProductCard = ({
             <p className="custom-product-rating">⭐⭐⭐⭐</p>
           </NavLink>
           <div className="custom-product-buttons">
-            <button className="custom-update-button">
+            <button className="custom-update-button" onClick={handleAddCart}>
               {loading ? (
                 <img className="spinner-green" src={image} alt="spinner" />
               ) : (
